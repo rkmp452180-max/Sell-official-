@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELL OFFICIAL | Digital Products & Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { padding: 10px 20px; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary { background: var(--secondary); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        header { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; padding: 15px 0; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links li a { text-decoration: none; color: var(--dark); font-weight: 500; cursor: pointer; }
+        .nav-links li a:hover, .nav-links li a.active { color: var(--primary); }
+
+        .hero { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 60px 0; text-align: center; border-radius: 0 0 30px 30px; margin-bottom: 40px; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+
+        .card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); transition: transform 0.3s; border: 1px solid #e2e8f0; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { width: 100%; height: 180px; background: #e2e8f0; border-radius: var(--radius); margin-bottom: 15px; object-fit: cover; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--secondary); }
+        .card-title { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; }
+        .card-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+        .card-desc { color: var(--secondary); font-size: 0.9rem; margin-bottom: 15px; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--dark); }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
+        .form-control:focus { outline: 2px solid var(--primary); border-color: transparent; }
+
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--secondary); }
+
+        .admin-sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 250px; background: var(--dark); color: white; padding: 20px; overflow-y: auto; z-index: 90; }
+        .admin-main { margin-left: 250px; padding: 30px; }
+        .admin-menu-item { padding: 12px 15px; cursor: pointer; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
+        .admin-menu-item:hover, .admin-menu-item.active { background: rgba(255,255,255,0.1); }
+        .stat-card { background: white; padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+        
+        .data-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .data-table th { background: #f1f5f9; font-weight: 600; }
+        .data-table tr:hover { background: #f8fafc; }
+
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .admin-sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+            .admin-sidebar.open { transform: translateX(0); }
+            .admin-main { margin-left: 0; }
+            .nav-links { display: none; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo" onclick="showPage('home')">SELL OFFICIAL</a>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a onclick="showPage('products')">Products</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="checkAuthForPage('orders')">My Orders</a></li>
+                <li><a onclick="openAuthModal()" id="authLink">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main id="app">
+        <div class="loader"></div>
+        <p class="text-center">Loading System...</p>
+    </main>
+
+    <footer style="background: var(--dark); color: white; padding: 40px 0; margin-top: 60px; text-align: center;">
+        <div class="container">
+            <h3>SELL OFFICIAL</h3>
+            <p>Websites • Apps • Source Code • Digital Services</p>
+            <p style="margin-top: 10px;">📞 Customer Support: 01845077415</p>
+            <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                &copy; 2026 Sell Official. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('authModal')">&times;</span>
+            <h2 class="text-center" style="margin-bottom: 20px;">🔐 Account Access</h2>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="authEmail" class="form-control" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="authPass" class="form-control" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary" style="width: 100%" onclick="handleLogin()">Login / Register</button>
+            <p class="text-center" style="margin-top: 15px; font-size: 0.9rem; color: var(--secondary);">
+                Admin: jblsongrimix999@gmail.com
+            </p>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('orderModal')">&times;</span>
+            <h2 id="orderModalTitle">Place Order</h2>
+            <div id="orderFormContent"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrnY92pSr_jjXhim2hT0JBhz8NEIHgrn0",
+            authDomain: "sell-official.firebaseapp.com",
+            databaseURL: "https://sell-official-default-rtdb.firebaseio.com",
+            projectId: "sell-official",
+            storageBucket: "sell-official.firebasestorage.app",
+            messagingSenderId: "518778129904",
+            appId: "1:518778129904:web:4eaa33bb77392c414e6135"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Global Constants
+        const ADMIN_EMAIL = "jblsongrimix999@gmail.com";
+        const SUPPORT_WHATSAPP = "01845077415";
+        const PAYMENT_NUMBER = "01893109600";
+
+        let currentUser = null;
+        let products = [];
+        let services = [];
+        let orders = [];
+        let settings = {};
+
+        // Load Data from Firebase
+        async function loadData() {
+            try {
+                // Load Settings
+                const settingsDoc = await db.collection('settings').doc('store').get();
+                if (settingsDoc.exists) {
+                    settings = settingsDoc.data();
+                } else {
+                    settings = { whatsapp: SUPPORT_WHATSAPP, bkash: PAYMENT_NUMBER, nagad: PAYMENT_NUMBER };
+                    await db.collection('settings').doc('store').set(settings);
+                }
+
+                // Load Services
+                const servicesSnap = await db.collection('services').get();
+                services = [];
+                if (servicesSnap.empty) {
+                    const defaultServices = [
+                        { name: 'Custom Website Development', price: 5000, icon: '🌐', desc: 'WordPress, React, or Custom PHP website.' },
+                        { name: 'Android App Development', price: 10000, icon: '📱', desc: 'Native Android or Flutter app development.' },
+                        { name: 'UI/UX Design', price: 3000, icon: '🎨', desc: 'Modern app and website interface design.' },
+                        { name: 'Bug Fixing & Support', price: 1000, icon: '🐛', desc: 'Fix errors in your existing code.' },
+                        { name: 'API Integration', price: 4000, icon: '🔌', desc: 'Connect third-party APIs to your system.' },
+                        { name: 'SEO Optimization', price: 2500, icon: '🚀', desc: 'Rank your website higher on Google.' }
+                    ];
+                    const batch = db.batch();
+                    defaultServices.forEach(s => {
+                        const ref = db.collection('services').doc();
+                        batch.set(ref, s);
+                        services.push({ id: ref.id, ...s });
+                    });
+                    await batch.commit();
+                } else {
+                    servicesSnap.forEach(doc => services.push({ id: doc.id, ...doc.data() }));
+                }
+
+                // Load Products
+                const productsSnap = await db.collection('products').get();
+                products = [];
+                productsSnap.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
+
+                renderHome(document.getElementById('app'));
+            } catch (error) {
+                console.error("Error loading data:", error);
+                document.getElementById('app').innerHTML = `<p class="text-center" style="color:red">Error: Check Firebase Console & Rules</p>`;
+            }
+        }
+
+        // Auth State Listener
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            const authLink = document.getElementById('authLink');
+            if (user) {
+                authLink.innerText = user.email.split('@')[0];
+            } else {
+                authLink.innerText = 'Login';
+            }
+        });
+
+        // Navigation
+        function showPage(pageId) {
+            const app = document.getElementById('app');
+            window.scrollTo(0,0);
+            
+            if (pageId === 'home') renderHome(app);
+            else if (pageId === 'products') renderProducts(app);
+            else if (pageId === 'services') renderServices(app);
+            else if (pageId === 'orders') renderUserOrders(app);
+            else if (pageId === 'admin') renderAdmin(app);
+        }
+
+        function checkAuthForPage(page) {
+            if (!currentUser) {
+                openAuthModal();
+            } else {
+                showPage(page);
+            }
+        }
+
+        // Render Functions
+        function renderHome(container) {
+            container.innerHTML = `
+                <section class="hero">
+                    <div class="container">
+                        <h1>Build. Buy. Grow.</h1>
+                        <p>Your one-stop shop for Websites, Apps, Source Codes, and Digital Services.</p>
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn btn-white" style="background: white; color: var(--primary)" onclick="showPage('products')">🛒 Browse Products</button>
+                            <button class="btn btn-secondary" style="background: rgba(255,255,255,0.2); color: white" onclick="showPage('services')">🛠️ View Services</button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="grid grid-3" style="margin-bottom: 40px;">
+                        <div class="card text-center">
+                            <h3>${products.length + services.length}+</h3>
+                            <p>Digital Assets</p>
+                        </div>
+                        <div class="card text-center">
+                            <h3>24/7</h3>
+                            <p>Support: ${settings.whatsapp || SUPPORT_WHATSAPP}</p>
+                        </div>
+                        <div class="card text-center">
+                            <h3>Secure</h3>
+                            <p>Payment Protected</p>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-bottom: 20px;">🔥 Featured Services</h2>
+                    <div class="grid grid-3" id="homeServicesGrid"></div>
+                    
+                    <div class="text-center" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="showPage('services')">View All Services</button>
+                    </div>
+                </div>
+            `;
+            
+            const grid = document.getElementById('homeServicesGrid');
+            services.slice(0, 3).forEach(s => {
+                grid.innerHTML += createServiceCard(s);
+            });
+        }
+
+        function renderProducts(container) {
+            container.innerHTML = `
+                <div class="container" style="padding-top: 40px;">
+                    <h2 style="margin-bottom: 20px;">🛒 Digital Products</h2>
+                    <div class="grid grid-3" id="productsGrid">
+                        ${products.length === 0 ? '<p>No products available yet.</p>' : ''}
+                    </div>
+                </div>
+            `;
+            const grid = document.getElementById('productsGrid');
+            products.forEach(p => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="card-img"><i class="fas fa-box"></i></div>
+                        <h3 class="card-title">${p.name}</h3>
+                        <p class="card-desc">${p.desc || 'High quality digital product'}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="card-price">৳${p.price}</span>
+                            <button class="btn btn-primary btn-sm" onclick="openOrderModal('product', p.id, p.name, p.price)">Buy Now</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderServices(container) {
+            container.innerHTML = `
+                <div class="container" style="padding-top: 40px;">
+                    <h2 style="margin-bottom: 20px;">🛠️ Development Services</h2>
+                    <div class="grid grid-3" id="servicesGrid"></div>
+                </div>
+            `;
+            const grid = document.getElementById('servicesGrid');
+            services.forEach(s => {
+                grid.innerHTML += createServiceCard(s);
+            });
+        }
+
+        function createServiceCard(s) {
+            return `
+                <div class="card">
+                    <div class="card-img" style="font-size: 4rem;">${s.icon}</div>
+                    <h3 class="card-title">${s.name}</h3>
+                    <p class="card-desc">${s.desc}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="card-price">From ৳${s.price}</span>
+                        <button class="btn btn-primary btn-sm" onclick="openOrderModal('service', s.id, s.name, s.price)">Order Now</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderUserOrders(container) {
+            if (!currentUser) return showPage('home');
+            
+            const myOrders = orders.filter(o => o.userEmail === currentUser.email);
+            
+            container.innerHTML = `
+                <div class="container" style="padding-top: 40px;">
+                    <h2 style="margin-bottom: 20px;">📦 My Orders</h2>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${myOrders.length === 0 ? '<tr><td colspan="5" class="text-center">No orders found.</td></tr>' : ''}
+                                ${myOrders.map(o => `
+                                    <tr>
+                                        <td>#${o.id.substr(0,6)}</td>
+                                        <td>${o.itemName}</td>
+                                        <td>৳${o.amount}</td>
+                                        <td><span class="btn btn-sm ${o.status === 'Pending' ? 'btn-warning' : 'btn-success'}" style="padding: 4px 8px; font-size: 0.8rem;">${o.status}</span></td>
+                                        <td>${new Date(o.date.seconds * 1000).toLocaleDateString()}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Admin Panel
+        function renderAdmin(container) {
+            if (!currentUser || currentUser.email !== ADMIN_EMAIL) {
+                alert('Access Denied. Admin privileges required.');
+                return showPage('home');
+            }
+
+            container.innerHTML = `
+                <div class="admin-sidebar">
+                    <h3 style="margin-bottom: 30px; padding-left: 15px;">⚙️ Admin Panel</h3>
+                    <div class="admin-menu-item active" onclick="renderAdminDashboard()"><i class="fas fa-chart-line"></i> Dashboard</div>
+                    <div class="admin-menu-item" onclick="renderAdminServices()"><i class="fas fa-tools"></i> Services</div>
+                    <div class="admin-menu-item" onclick="renderAdminOrders()"><i class="fas fa-shopping-cart"></i> Orders</div>
+                    <div class="admin-menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+                <div class="admin-main">
+                    <div id="adminContent"></div>
+                </div>
+            `;
+            renderAdminDashboard();
+        }
+
+        function renderAdminDashboard() {
+            const content = document.getElementById('adminContent');
+            content.innerHTML = `
+                <h2>Dashboard Overview</h2>
+                <div class="grid grid-4" style="margin-top: 20px;">
+                    <div class="stat-card"><div class="stat-number">${services.length}</div><div>Services</div></div>
+                    <div class="stat-card"><div class="stat-number">${products.length}</div><div>Products</div></div>
+                    <div class="stat-card"><div class="stat-number">${orders.length}</div><div>Orders</div></div>
+                </div>
+            `;
+        }
+
+        async function renderAdminServices() {
+            const content = document.getElementById('adminContent');
+            content.innerHTML = `<h2>Manage Services</h2><button class="btn btn-primary" style="margin: 20px 0;" onclick="adminAddService()">+ Add Service</button><div class="loader"></div>`;
+            
+            const snap = await db.collection('services').get();
+            const list = [];
+            snap.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+
+            let html = `<table class="data-table"><thead><tr><th>Name</th><th>Price</th><th>Action</th></tr></thead><tbody>`;
+            list.forEach(s => {
+                html += `<tr><td>${s.name}</td><td>৳${s.price}</td><td><button class="btn btn-danger btn-sm" onclick="adminDeleteService('${s.id}')">Delete</button></td></tr>`;
+            });
+            html += `</tbody></table>`;
+            content.innerHTML = `<h2>Manage Services</h2><button class="btn btn-primary" style="margin: 20px 0;" onclick="adminAddService()">+ Add Service</button>` + html;
+        }
+
+        async function renderAdminOrders() {
+            const content = document.getElementById('adminContent');
+            content.innerHTML = `<h2>All Orders</h2><div class="loader"></div>`;
+
+            const snap = await db.collection('orders').orderBy('date', 'desc').get();
+            const list = [];
+            snap.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+
+            let html = `<table class="data-table" style="margin-top: 20px;"><thead><tr><th>Customer</th><th>Item</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>`;
+            list.forEach(o => {
+                html += `
+                    <tr>
+                        <td>${o.userEmail}</td>
+                        <td>${o.itemName}</td>
+                        <td>৳${o.amount}</td>
+                        <td>${o.status}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="adminUpdateOrder('${o.id}', 'Completed')">✓</button>
+                            <button class="btn btn-warning btn-sm" onclick="adminUpdateOrder('${o.id}', 'Pending')">!</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+            content.innerHTML = `<h2>All Orders</h2>` + html;
+        }
+
+        // Admin Actions
+        async function adminAddService() {
+            const name = prompt("Service Name:");
+            if(!name) return;
+            const price = prompt("Price:");
+            const icon = prompt("Icon (Emoji):", "🛠️");
+            const desc = prompt("Description:");
+            
+            await db.collection('services').add({ name, price, icon, desc });
+            alert('Service Added!');
+            renderAdminServices();
+        }
+
+        async function adminDeleteService(id) {
+            if(confirm('Delete this service?')) {
+                await db.collection('services').doc(id).delete();
+                renderAdminServices();
+            }
+        }
+
+        async function adminUpdateOrder(id, status) {
+            await db.collection('orders').doc(id).update({ status });
+            renderAdminOrders();
+        }
+
+        // Ordering System
+        function openOrderModal(type, id, name, price) {
+            if (!currentUser) {
+                alert('Please login first!');
+                openAuthModal();
+                return;
+            }
+
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderFormContent');
+            document.getElementById('orderModalTitle').innerText = `Order: ${name}`;
+
+            content.innerHTML = `
+                <div class="notice" style="background: #dbeafe; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p><strong>📱 Payment Instruction:</strong></p>
+                    <p>1. Send ৳${price} to bKash/Nagad: <strong>${PAYMENT_NUMBER}</strong></p>
+                    <p>2. Enter the Transaction ID below</p>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="ordMethod" class="form-control">
+                        <option value="bKash">bKash (${PAYMENT_NUMBER})</option>
+                        <option value="Nagad">Nagad (${PAYMENT_NUMBER})</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Transaction ID (TrxID) *</label>
+                    <input type="text" id="ordTrx" class="form-control" placeholder="e.g., 8HSKJ72">
+                </div>
+                <div class="form-group">
+                    <label>Amount Paid *</label>
+                    <input type="number" id="ordAmount" class="form-control" value="${price}">
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp *</label>
+                    <input type="text" id="ordPhone" class="form-control" placeholder="01XXXXXXXXX">
+                </div>
+                <button class="btn btn-success" style="width: 100%" onclick="submitOrder('${type}', '${id}', '${name}', ${price})">Confirm Order</button>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        async function submitOrder(type, id, name, price) {
+            const trx = document.getElementById('ordTrx').value;
+            const amount = document.getElementById('ordAmount').value;
+            const phone = document.getElementById('ordPhone').value;
+            const method = document.getElementById('ordMethod').value;
+
+            if(!trx || !amount || !phone) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            const newOrder = {
+                userEmail: currentUser.email,
+                type: type,
+                itemId: id,
+                itemName: name,
+                amount: amount,
+                method: method,
+                trxId: trx,
+                userPhone: phone,
+                status: 'Pending',
+                date: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            await db.collection('orders').add(newOrder);
+            
+            closeModal('orderModal');
+            alert('Order Placed Successfully! We will contact you at ' + phone);
+            showPage('orders');
+        }
+
+        // Auth Functions
+        function openAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('authEmail').value;
+            const pass = document.getElementById('authPass').value;
+
+            try {
+                await auth.signInWithEmailAndPassword(email, pass);
+                closeModal('authModal');
+                if (email === ADMIN_EMAIL) {
+                    showPage('admin');
+                } else {
+                    showPage('home');
+                }
+            } catch (error) {
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    const confirmCreate = confirm("Account not found. Do you want to create a new account?");
+                    if (confirmCreate) {
+                        try {
+                            await auth.createUserWithEmailAndPassword(email, pass);
+                            closeModal('authModal');
+                            showPage('home');
+                        } catch (createError) {
+                            alert("Error: " + createError.message);
+                        }
+                    }
+                } else {
+                    alert("Error: " + error.message);
+                }
+            }
+        }
+
+        function logout() {
+            auth.signOut();
+            showPage('home');
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
