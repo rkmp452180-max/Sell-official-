@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELL OFFICIAL | Complete E-Commerce</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--light); color: var(--dark); line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { padding: 10px 20px; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary { background: var(--secondary); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-sm { padding: 6px 12px; font-size: 0.85rem; }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        /* Header */
+        header { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; padding: 15px 0; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; cursor: pointer; }
+        .nav-links a:hover { color: var(--primary); }
+        .cart-icon { position: relative; cursor: pointer; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--danger); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 60px 0; text-align: center; border-radius: 0 0 30px 30px; margin-bottom: 40px; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* Cards */
+        .card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { width: 100%; height: 180px; background: #e2e8f0; border-radius: var(--radius); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .card-title { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; }
+        .card-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+        .card-desc { color: var(--secondary); font-size: 0.9rem; margin-bottom: 15px; }
+
+        /* Forms */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
+        .form-control:focus { outline: 2px solid var(--primary); }
+
+        /* Modals */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: var(--white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+
+        /* Admin */
+        .admin-sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 260px; background: var(--dark); color: white; padding: 20px; overflow-y: auto; z-index: 90; }
+        .admin-main { margin-left: 260px; padding: 30px; }
+        .admin-menu-item { padding: 12px 15px; cursor: pointer; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .admin-menu-item:hover, .admin-menu-item.active { background: rgba(255,255,255,0.1); }
+        .stat-card { background: white; padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+
+        /* Table */
+        .data-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .data-table th { background: #f1f5f9; }
+
+        /* Loader */
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 50px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Cart */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #e2e8f0; }
+        .cart-total { font-size: 1.3rem; font-weight: 700; margin-top: 20px; text-align: right; }
+
+        @media (max-width: 768px) {
+            .admin-sidebar { transform: translateX(-100%); }
+            .admin-main { margin-left: 0; }
+            .nav-links { display: none; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo" onclick="showPage('home')">SELL OFFICIAL</a>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="showPage('products')">Products</a></li>
+                <li><a onclick="showPage('cart')"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" class="cart-count">0</span></a></li>
+                <li><a onclick="checkAuthForPage('my-orders')">My Orders</a></li>
+                <li><a onclick="checkAuthForPage('profile')">Profile</a></li>
+                <li><a onclick="openAuthModal()" id="authLink">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="app">
+        <div class="loader"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark); color: white; padding: 40px 0; margin-top: 60px;">
+        <div class="container text-center">
+            <h3>SELL OFFICIAL</h3>
+            <p>Websites • Apps • Source Code • Digital Services</p>
+            <p style="margin-top: 10px;">📞 Support: 01845077415 | 💳 Payment: 01893109600</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('authModal')">&times;</span>
+            <h2 class="text-center" style="margin-bottom: 20px;">🔐 Login / Register</h2>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="authEmail" class="form-control" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="authPass" class="form-control" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary" style="width: 100%" onclick="handleAuth()">Continue</button>
+            <p class="text-center" style="margin-top: 15px; font-size: 0.85rem; color: var(--secondary);">Admin: jblsongrimix999@gmail.com</p>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
+            <h2>🛒 Shopping Cart</h2>
+            <div id="cartItems" style="margin-top: 20px;"></div>
+            <div id="cartTotal" class="cart-total"></div>
+            <button class="btn btn-success" style="width: 100%; margin-top: 20px;" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('orderModal')">&times;</span>
+            <h2 id="orderModalTitle">Checkout</h2>
+            <div id="orderFormContent"></div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrnY92pSr_jjXhim2hT0JBhz8NEIHgrn0",
+            authDomain: "sell-official.firebaseapp.com",
+            databaseURL: "https://sell-official-default-rtdb.firebaseio.com",
+            projectId: "sell-official",
+            storageBucket: "sell-official.firebasestorage.app",
+            messagingSenderId: "518778129904",
+            appId: "1:518778129904:web:4eaa33bb77392c414e6135"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Constants
+        const ADMIN_EMAIL = "jblsongrimix999@gmail.com";
+        const SUPPORT_PHONE = "01845077415";
+        const PAYMENT_NUMBER = "01893109600";
+
+        // State
+        let currentUser = null;
+        let services = [];
+        let products = [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let orders = [];
+
+        updateCartCount();
+
+        // Auth Listener
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            const authLink = document.getElementById('authLink');
+            if (user) {
+                authLink.innerText = user.email.split('@')[0];
+                authLink.onclick = () => { if(confirm('Logout?')) logout(); };
+            } else {
+                authLink.innerText = 'Login';
+                authLink.onclick = openAuthModal;
+            }
+        });
+
+        // Load Data
+        async function loadData() {
+            try {
+                // Services
+                const servSnap = await db.collection('services').get();
+                services = [];
+                if (servSnap.empty) {
+                    const defaults = [
+                        { name: 'Website Development', price: 5000, icon: '🌐', desc: 'Custom website with modern design' },
+                        { name: 'Android App', price: 10000, icon: '📱', desc: 'Native Android application' },
+                        { name: 'UI/UX Design', price: 3000, icon: '🎨', desc: 'Professional interface design' },
+                        { name: 'Bug Fixing', price: 1000, icon: '🐛', desc: 'Fix any code errors' },
+                        { name: 'API Integration', price: 4000, icon: '🔌', desc: 'Connect third-party APIs' },
+                        { name: 'SEO Service', price: 2500, icon: '🚀', desc: 'Google ranking optimization' }
+                    ];
+                    const batch = db.batch();
+                    defaults.forEach(s => {
+                        const ref = db.collection('services').doc();
+                        batch.set(ref, s);
+                        services.push({ id: ref.id, ...s });
+                    });
+                    await batch.commit();
+                } else {
+                    servSnap.forEach(doc => services.push({ id: doc.id, ...doc.data() }));
+                }
+
+                // Products
+                const prodSnap = await db.collection('products').get();
+                products = [];
+                prodSnap.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
+
+                // Orders
+                const ordSnap = await db.collection('orders').get();
+                orders = [];
+                ordSnap.forEach(doc => orders.push({ id: doc.id, ...doc.data() }));
+
+                renderHome();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('app').innerHTML = '<p class="text-center" style="color:red; margin-top:50px">Error: Check Firebase Rules</p>';
+            }
+        }
+
+        // Navigation
+        function showPage(page) {
+            const app = document.getElementById('app');
+            window.scrollTo(0, 0);
+
+            if (page === 'home') renderHome();
+            else if (page === 'services') renderServices();
+            else if (page === 'products') renderProducts();
+            else if (page === 'cart') renderCart();
+            else if (page === 'my-orders') renderMyOrders();
+            else if (page === 'profile') renderProfile();
+            else if (page === 'admin') renderAdmin();
+        }
+
+        function checkAuthForPage(page) {
+            if (!currentUser) { openAuthModal(); } else { showPage(page); }
+        }
+
+        // Render Home
+        function renderHome() {
+            document.getElementById('app').innerHTML = `
+                <section class="hero">
+                    <div class="container">
+                        <h1>Build. Buy. Grow.</h1>
+                        <p>Your complete digital solutions marketplace</p>
+                        <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+                            <button class="btn" style="background:white; color:var(--primary)" onclick="showPage('services')">🛠️ Services</button>
+                            <button class="btn" style="background:rgba(255,255,255,0.2)" onclick="showPage('products')">🛒 Products</button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="grid grid-4" style="margin-bottom:40px;">
+                        <div class="stat-card"><div class="stat-number">${services.length}</div><div>Services</div></div>
+                        <div class="stat-card"><div class="stat-number">${products.length}</div><div>Products</div></div>
+                        <div class="stat-card"><div class="stat-number">${orders.length}</div><div>Orders</div></div>
+                        <div class="stat-card"><div class="stat-number">24/7</div><div>Support</div></div>
+                    </div>
+
+                    <h2 style="margin-bottom:20px;">🔥 Popular Services</h2>
+                    <div class="grid grid-3">
+                        ${services.slice(0, 3).map(s => createServiceCard(s)).join('')}
+                    </div>
+
+                    <div class="text-center" style="margin:30px 0;">
+                        <button class="btn btn-primary" onclick="showPage('services')">View All Services</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Services
+        function renderServices() {
+            document.getElementById('app').innerHTML = `
+                <div class="container" style="padding-top:40px;">
+                    <h2 style="margin-bottom:20px;">🛠️ All Services</h2>
+                    <div class="grid grid-3">
+                        ${services.map(s => createServiceCard(s)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Products
+        function renderProducts() {
+            document.getElementById('app').innerHTML = `
+                <div class="container" style="padding-top:40px;">
+                    <h2 style="margin-bottom:20px;">🛒 Digital Products</h2>
+                    <div class="grid grid-3">
+                        ${products.length === 0 ? '<p>No products yet.</p>' : products.map(p => createProductCard(p)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Cart
+        function renderCart() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('app').innerHTML = `
+                <div class="container" style="padding-top:40px;">
+                    <h2 style="margin-bottom:20px;">🛒 Shopping Cart</h2>
+                    ${cart.length === 0 ? '<p>Cart is empty.</p>' : `
+                        <div class="card">
+                            ${cart.map((item, idx) => `
+                                <div class="cart-item">
+                                    <div>
+                                        <h4>${item.name}</h4>
+                                        <p style="color:var(--secondary)">${item.type}</p>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:15px;">
+                                        <span style="font-weight:700; color:var(--primary)">৳${item.price}</span>
+                                        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${idx})">Remove</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            <div class="cart-total">Total: ৳${total}</div>
+                            <button class="btn btn-success" style="width:100%; margin-top:20px;" onclick="checkout()">Checkout</button>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        // Render My Orders
+        function renderMyOrders() {
+            if (!currentUser) return showPage('home');
+            const myOrders = orders.filter(o => o.userEmail === currentUser.email);
+
+            document.getElementById('app').innerHTML = `
+                <div class="container" style="padding-top:40px;">
+                    <h2 style="margin-bottom:20px;">📦 My Orders</h2>
+                    ${myOrders.length === 0 ? '<p>No orders yet.</p>' : `
+                        <div style="overflow-x:auto;">
+                            <table class="data-table">
+                                <thead><tr><th>ID</th><th>Item</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+                                <tbody>
+                                    ${myOrders.map(o => `
+                                        <tr>
+                                            <td>#${o.id.slice(0,6)}</td>
+                                            <td>${o.itemName}</td>
+                                            <td>৳${o.amount}</td>
+                                            <td><span class="btn btn-sm ${o.status==='Pending'?'btn-warning':'btn-success'}" style="padding:4px 8px">${o.status}</span></td>
+                                            <td>${new Date(o.date?.seconds*1000 || Date.now()).toLocaleDateString()}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        // Render Profile
+        function renderProfile() {
+            if (!currentUser) return showPage('home');
+            document.getElementById('app').innerHTML = `
+                <div class="container" style="padding-top:40px;">
+                    <h2 style="margin-bottom:20px;">👤 My Profile</h2>
+                    <div class="card" style="max-width:500px;">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" value="${currentUser.email}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" id="profilePhone" class="form-control" placeholder="01XXXXXXXXX">
+                        </div>
+                        <button class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
+                        <button class="btn btn-danger" style="margin-top:10px;" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Service Card
+        function createServiceCard(s) {
+            return `
+                <div class="card">
+                    <div class="card-img" style="font-size:4rem">${s.icon}</div>
+                    <h3 class="card-title">${s.name}</h3>
+                    <p class="card-desc">${s.desc}</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center">
+                        <span class="card-price">৳${s.price}</span>
+                        <button class="btn btn-primary btn-sm" onclick="addToCart('service', '${s.id}', '${s.name}', ${s.price})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Product Card
+        function createProductCard(p) {
+            return `
+                <div class="card">
+                    <div class="card-img"><i class="fas fa-box"></i></div>
+                    <h3 class="card-title">${p.name}</h3>
+                    <p class="card-desc">${p.desc || 'Digital product'}</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center">
+                        <span class="card-price">৳${p.price}</span>
+                        <button class="btn btn-primary btn-sm" onclick="addToCart('product', '${p.id}', '${p.name}', ${p.price})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Cart Functions
+        function addToCart(type, id, name, price) {
+            cart.push({ type, id, name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Added to cart!');
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').innerText = cart.length;
+        }
+
+        function checkout() {
+            if (!currentUser) {
+                alert('Please login first!');
+                openAuthModal();
+                return;
+            }
+            if (cart.length === 0) {
+                alert('Cart is empty!');
+                return;
+            }
+            openOrderModal();
+        }
+
+        // Order Modal
+        function openOrderModal() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const modal = document.getElementById('orderModal');
+            document.getElementById('orderModalTitle').innerText = 'Checkout';
+            document.getElementById('orderFormContent').innerHTML = `
+                <div style="background:#dbeafe; padding:15px; border-radius:8px; margin-bottom:15px;">
+                    <p><strong>📱 Payment:</strong> Send ৳${total} to ${PAYMENT_NUMBER}</p>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="ordMethod" class="form-control">
+                        <option value="bKash">bKash</option>
+                        <option value="Nagad">Nagad</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Transaction ID *</label>
+                    <input type="text" id="ordTrx" class="form-control" placeholder="e.g., 8HSKJ72">
+                </div>
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input type="text" id="ordPhone" class="form-control" placeholder="01XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Items (${cart.length})</label>
+                    <div style="background:#f1f5f9; padding:10px; border-radius:8px; max-height:150px; overflow-y:auto;">
+                        ${cart.map(item => `<div>${item.name} - ৳${item.price}</div>`).join('')}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Total Amount</label>
+                    <input type="text" class="form-control" value="৳${total}" disabled>
+                </div>
+                <button class="btn btn-success" style="width:100%" onclick="submitOrder()">Place Order</button>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        // Submit Order
+        async function submitOrder() {
+            const trx = document.getElementById('ordTrx').value;
+            const phone = document.getElementById('ordPhone').value;
+            const method = document.getElementById('ordMethod').value;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            if (!trx || !phone) {
+                alert('Fill all fields!');
+                return;
+            }
+
+            try {
+                await db.collection('orders').add({
+                    userEmail: currentUser.email,
+                    items: cart,
+                    totalAmount: total,
+                    method, trxId: trx, userPhone: phone,
+                    status: 'Pending',
+                    date: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                closeModal('orderModal');
+                alert('Order placed! We will contact: ' + phone);
+                showPage('my-orders');
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        }
+
+        // Update Profile
+        async function updateProfile() {
+            const phone = document.getElementById('profilePhone').value;
+            if (!phone) {
+                alert('Enter phone number!');
+                return;
+            }
+            try {
+                await db.collection('users').doc(currentUser.uid).set({
+                    email: currentUser.email,
+                    phone: phone
+                });
+                alert('Profile updated!');
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        }
+
+        // Auth Functions
+        function openAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        async function handleAuth() {
+            const email = document.getElementById('authEmail').value;
+            const pass = document.getElementById('authPass').value;
+
+            try {
+                await auth.signInWithEmailAndPassword(email, pass);
+                closeModal('authModal');
+                if (email === ADMIN_EMAIL) showPage('admin');
+                else showPage('home');
+            } catch (err) {
+                if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+                    if (confirm('Account not found. Create new?')) {
+                        await auth.createUserWithEmailAndPassword(email, pass);
+                        closeModal('authModal');
+                        showPage('home');
+                    }
+                } else {
+                    alert(err.message);
+                }
+            }
+        }
+
+        function logout() {
+            auth.signOut();
+            showPage('home');
+        }
+
+        // Admin Panel
+        function renderAdmin() {
+            if (!currentUser || currentUser.email !== ADMIN_EMAIL) {
+                alert('Admin only!');
+                return showPage('home');
+            }
+
+            document.getElementById('app').innerHTML = `
+                <div class="admin-sidebar">
+                    <h3 style="margin-bottom:30px; padding-left:15px">⚙️ Admin Panel</h3>
+                    <div class="admin-menu-item active" onclick="renderAdminDash()"><i class="fas fa-chart-line"></i> Dashboard</div>
+                    <div class="admin-menu-item" onclick="renderAdminServices()"><i class="fas fa-tools"></i> Services</div>
+                    <div class="admin-menu-item" onclick="renderAdminProducts()"><i class="fas fa-box"></i> Products</div>
+                    <div class="admin-menu-item" onclick="renderAdminOrders()"><i class="fas fa-shopping-cart"></i> Orders</div>
+                    <div class="admin-menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+                <div class="admin-main">
+                    <div id="adminContent"></div>
+                </div>
+            `;
+            renderAdminDash();
+        }
+
+        function renderAdminDash() {
+            document.getElementById('adminContent').innerHTML = `
+                <h2>Dashboard</h2>
+                <div class="grid grid-4" style="margin-top:20px">
+                    <div class="stat-card"><div class="stat-number">${services.length}</div><div>Services</div></div>
+                    <div class="stat-card"><div class="stat-number">${products.length}</div><div>Products</div></div>
+                    <div class="stat-card"><div class="stat-number">${orders.length}</div><div>Orders</div></div>
+                    <div class="stat-card"><div class="stat-number">${orders.filter(o=>o.status==='Pending').length}</div><div>Pending</div></div>
+                </div>
+            `;
+        }
+
+        async function renderAdminServices() {
+            const snap = await db.collection('services').get();
+            const list = [];
+            snap.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+
+            document.getElementById('adminContent').innerHTML = `
+                <h2>Manage Services</h2>
+                <button class="btn btn-primary" style="margin:20px 0" onclick="adminAddService()">+ Add Service</button>
+                <table class="data-table">
+                    <thead><tr><th>Name</th><th>Price</th><th>Action</th></tr></thead>
+                    <tbody>
+                        ${list.map(s => `
+                            <tr>
+                                <td>${s.name}</td>
+                                <td>৳${s.price}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="adminDeleteService('${s.id}')">Delete</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function renderAdminProducts() {
+            const snap = await db.collection('products').get();
+            const list = [];
+            snap.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+
+            document.getElementById('adminContent').innerHTML = `
+                <h2>Manage Products</h2>
+                <button class="btn btn-primary" style="margin:20px 0" onclick="adminAddProduct()">+ Add Product</button>
+                <table class="data-table">
+                    <thead><tr><th>Name</th><th>Price</th><th>Action</th></tr></thead>
+                    <tbody>
+                        ${list.map(p => `
+                            <tr>
+                                <td>${p.name}</td>
+                                <td>৳${p.price}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="adminDeleteProduct('${p.id}')">Delete</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function renderAdminOrders() {
+            const snap = await db.collection('orders').orderBy('date', 'desc').get();
+            const list = [];
+            snap.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+
+            document.getElementById('adminContent').innerHTML = `
+                <h2>All Orders</h2>
+                <table class="data-table" style="margin-top:20px">
+                    <thead><tr><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+                    <tbody>
+                        ${list.map(o => `
+                            <tr>
+                                <td>${o.userEmail}<br><small>${o.userPhone}</small></td>
+                                <td>${o.items.map(i=>i.name).join(', ')}</td>
+                                <td>৳${o.totalAmount}</td>
+                                <td>${o.status}</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm" onclick="adminUpdateOrder('${o.id}', 'Completed')">✓</button>
+                                    <button class="btn btn-warning btn-sm" onclick="adminUpdateOrder('${o.id}', 'Pending')">!</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function adminAddService() {
+            const name = prompt('Service Name:');
+            const price = prompt('Price:');
+            const icon = prompt('Icon (emoji):', '🛠️');
+            const desc = prompt('Description:');
+            await db.collection('services').add({ name, price, icon, desc });
+            alert('Added!');
+            renderAdminServices();
+        }
+
+        async function adminAddProduct() {
+            const name = prompt('Product Name:');
+            const price = prompt('Price:');
+            const desc = prompt('Description:');
+            await db.collection('products').add({ name, price, desc });
+            alert('Added!');
+            renderAdminProducts();
+        }
+
+        async function adminDeleteService(id) {
+            if (confirm('Delete?')) {
+                await db.collection('services').doc(id).delete();
+                renderAdminServices();
+            }
+        }
+
+        async function adminDeleteProduct(id) {
+            if (confirm('Delete?')) {
+                await db.collection('products').doc(id).delete();
+                renderAdminProducts();
+            }
+        }
+
+        async function adminUpdateOrder(id, status) {
+            await db.collection('orders').doc(id).update({ status });
+            renderAdminOrders();
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
