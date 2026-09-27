@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>Sell Official — Digital Products & Services</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f4f7fb;color:#111827}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+.hidden{display:none!important}
+
+:root{
+ --primary:#2563eb;
+ --primary2:#7c3aed;
+ --dark:#111827;
+ --muted:#64748b;
+ --card:#fff;
+ --border:#e5e7eb;
+ --danger:#dc2626;
+ --success:#16a34a;
+ --warning:#d97706;
+}
+
+.topbar{
+ position:sticky;top:0;z-index:50;
+ background:#fff;border-bottom:1px solid var(--border);
+ height:65px;display:flex;align-items:center;
+ padding:0 20px;gap:20px
+}
+.logo{
+ font-size:22px;font-weight:900;
+ background:linear-gradient(90deg,#2563eb,#7c3aed);
+ -webkit-background-clip:text;color:transparent
+}
+.search{
+ flex:1;max-width:550px;position:relative
+}
+.search input{
+ width:100%;padding:12px 18px;border:1px solid var(--border);
+ border-radius:30px;outline:0;background:#f8fafc
+}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.iconbtn{
+ width:42px;height:42px;border-radius:50%;
+ background:#f1f5f9;font-size:18px
+}
+.userbtn{
+ padding:9px 14px;border-radius:22px;background:#eef2ff;
+ color:#3730a3;font-weight:bold
+}
+
+.hero{
+ margin:20px auto;max-width:1200px;padding:50px 30px;
+ border-radius:25px;color:white;
+ background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed);
+ box-shadow:0 15px 40px #4338ca30
+}
+.hero h1{font-size:38px;margin-bottom:12px}
+.hero p{font-size:17px;line-height:1.7;max-width:700px}
+.hero-buttons{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+ padding:11px 18px;border-radius:10px;font-weight:bold;
+ transition:.2s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-dark{background:#111827;color:#fff}
+.btn-light{background:#fff;color:#1e3a8a}
+.btn-danger{background:#fee2e2;color:#991b1b}
+.btn-success{background:#dcfce7;color:#166534}
+.btn-warning{background:#fef3c7;color:#92400e}
+
+.container{max-width:1200px;margin:auto;padding:0 18px 40px}
+.section-title{
+ display:flex;justify-content:space-between;align-items:center;
+ margin:28px 0 16px
+}
+.section-title h2{font-size:24px}
+
+.categories{
+ display:flex;gap:10px;overflow-x:auto;padding-bottom:5px
+}
+.cat{
+ white-space:nowrap;background:white;border:1px solid var(--border);
+ padding:10px 16px;border-radius:25px
+}
+.cat:hover{background:#eef2ff}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+ gap:18px
+}
+.card{
+ background:var(--card);border:1px solid var(--border);
+ border-radius:18px;overflow:hidden;
+ box-shadow:0 5px 18px #00000008
+}
+.card-img{
+ height:165px;background:#e2e8f0;
+ display:flex;align-items:center;justify-content:center;
+ overflow:hidden
+}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-body{padding:17px}
+.card h3{font-size:18px;margin-bottom:8px}
+.desc{color:var(--muted);font-size:14px;line-height:1.6}
+.price{font-size:20px;font-weight:900;margin:12px 0;color:#1d4ed8}
+.price small{font-size:12px;color:var(--muted);font-weight:normal}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}
+.tag{
+ background:#eef2ff;color:#3730a3;
+ padding:4px 8px;border-radius:6px;font-size:11px
+}
+
+.support{
+ margin:35px 0;padding:25px;border-radius:20px;
+ background:linear-gradient(135deg,#0f172a,#1e293b);
+ color:#fff;text-align:center
+}
+.support h2{font-size:28px;margin-bottom:8px}
+.whatsapp{
+ display:inline-flex;margin-top:15px;padding:14px 25px;
+ border-radius:30px;background:#22c55e;color:#fff;
+ font-weight:900;font-size:20px
+}
+
+footer{
+ background:#0f172a;color:#cbd5e1;text-align:center;
+ padding:30px 15px;line-height:2
+}
+
+/* modal */
+.modal{
+ position:fixed;inset:0;background:#0008;z-index:100;
+ display:flex;align-items:center;justify-content:center;padding:15px
+}
+.modal-box{
+ background:white;width:100%;max-width:550px;
+ max-height:92vh;overflow:auto;border-radius:20px;padding:24px
+}
+.modal-head{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:20px
+}
+.close{
+ width:35px;height:35px;border-radius:50%;background:#f1f5f9
+}
+.form-group{margin-bottom:14px}
+.form-group label{
+ display:block;font-weight:bold;margin-bottom:6px;font-size:14px
+}
+.form-group input,.form-group textarea,.form-group select{
+ width:100%;padding:12px;border:1px solid #cbd5e1;
+ border-radius:9px;outline:0;background:#fff
+}
+.form-group textarea{min-height:100px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.auth{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:20px;
+ background:linear-gradient(135deg,#1d4ed8,#4f46e5,#7c3aed)
+}
+.auth-box{
+ background:#fff;width:100%;max-width:430px;
+ padding:30px;border-radius:24px;box-shadow:0 20px 60px #0005
+}
+.auth-logo{text-align:center;font-size:30px;font-weight:900;margin-bottom:8px}
+.auth-sub{text-align:center;color:#64748b;margin-bottom:25px}
+.auth-tabs{display:flex;margin-bottom:20px;background:#f1f5f9;border-radius:10px;padding:4px}
+.auth-tabs button{flex:1;padding:10px;border-radius:8px;background:transparent}
+.auth-tabs button.active{background:#fff;box-shadow:0 2px 8px #0001;font-weight:bold}
+
+.app-shell{min-height:100vh}
+.page{display:none}
+.page.active{display:block}
+
+.admin-layout{display:flex;min-height:calc(100vh - 65px)}
+.sidebar{
+ width:250px;background:#111827;color:#cbd5e1;
+ padding:18px;flex-shrink:0
+}
+.sidebar h3{color:#fff;margin-bottom:15px}
+.sidebtn{
+ display:block;width:100%;text-align:left;
+ padding:12px;border-radius:9px;
+ background:transparent;color:#cbd5e1;margin:4px 0
+}
+.sidebtn:hover,.sidebtn.active{background:#2563eb;color:white}
+.admin-content{flex:1;padding:22px;overflow:hidden}
+
+.stats{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+ gap:15px;margin-bottom:20px
+}
+.stat{
+ background:white;border:1px solid var(--border);
+ border-radius:15px;padding:18px
+}
+.stat .num{font-size:27px;font-weight:900;margin-top:7px}
+.stat .label{color:#64748b;font-size:14px}
+
+.admin-table-wrap{
+ overflow-x:auto;background:#fff;border:1px solid var(--border);
+ border-radius:15px
+}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th,td{padding:12px;border-bottom:1px solid var(--border);text-align:left;font-size:14px}
+th{background:#f8fafc}
+.badge{
+ display:inline-block;padding:5px 9px;border-radius:20px;
+ font-size:11px;font-weight:bold
+}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-yellow{background:#fef3c7;color:#92400e}
+.badge-blue{background:#dbeafe;color:#1e40af}
+
+.empty{
+ padding:45px;text-align:center;color:#64748b;
+ background:#fff;border-radius:15px
+}
+
+.toast{
+ position:fixed;right:18px;bottom:18px;z-index:300;
+ background:#111827;color:#fff;padding:14px 18px;
+ border-radius:10px;display:none;max-width:350px
+}
+
+.user-menu{
+ position:absolute;right:15px;top:58px;
+ background:white;border:1px solid var(--border);
+ box-shadow:0 10px 30px #0002;border-radius:12px;
+ width:200px;padding:8px;z-index:80
+}
+.user-menu button{
+ width:100%;padding:11px;text-align:left;
+ background:transparent;border-radius:8px
+}
+.user-menu button:hover{background:#f1f5f9}
+
+@media(max-width:800px){
+ .topbar{padding:0 10px;gap:8px}
+ .logo{font-size:18px}
+ .search{display:none}
+ .hero h1{font-size:28px}
+ .hero{padding:32px 20px}
+ .admin-layout{display:block}
+ .sidebar{
+  width:100%;display:flex;overflow-x:auto;
+  gap:5px;padding:8px
+ }
+ .sidebar h3{display:none}
+ .sidebtn{white-space:nowrap;width:auto}
+ .admin-content{padding:12px}
+ .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div id="toast" class="toast"></div>
+
+<!-- AUTH -->
+<div id="authScreen" class="auth">
+  <div class="auth-box">
+    <div class="auth-logo">SELL OFFICIAL</div>
+    <div class="auth-sub">Websites • Apps • Code • Digital Services</div>
+
+    <div class="auth-tabs">
+      <button id="loginTab" class="active" onclick="showAuth('login')">Login</button>
+      <button id="registerTab" onclick="showAuth('register')">Register</button>
+    </div>
+
+    <div id="loginForm">
+      <div class="form-group">
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input id="loginPassword" type="password" placeholder="Password">
+      </div>
+      <button class="btn btn-primary" style="width:100%" onclick="loginUser()">Login</button>
+      <button class="btn" style="width:100%;margin-top:8px;background:#f1f5f9" onclick="forgotPassword()">Forgot Password?</button>
+    </div>
+
+    <div id="registerForm" class="hidden">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input id="regName" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input id="regUsername" placeholder="username">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input id="regPhone" placeholder="01XXXXXXXXX">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input id="regEmail" type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input id="regPassword" type="password" placeholder="Minimum 6 characters">
+      </div>
+      <button class="btn btn-primary" style="width:100%" onclick="registerUser()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER APP -->
+<div id="customerApp" class="app-shell hidden">
+
+<header class="topbar">
+  <div class="logo">SELL OFFICIAL</div>
+
+  <div class="search">
+    <input id="searchInput" placeholder="Search products & services..." oninput="renderCustomer()">
+  </div>
+
+  <div class="nav-actions">
+    <button class="iconbtn" onclick="goHome()">🏠</button>
+    <button class="iconbtn" onclick="openOrders()">📦</button>
+    <button class="userbtn" onclick="toggleUserMenu()">👤 <span id="topUserName">User</span></button>
+  </div>
+
+  <div id="userMenu" class="user-menu hidden">
+    <button onclick="openProfile()">👤 Profile</button>
+    <button onclick="openOrders()">📦 My Orders</button>
+    <button onclick="openSupport()">💬 Support</button>
+    <button onclick="logoutUser()">🚪 Logout</button>
+  </div>
+</header>
+
+<main id="homePage" class="page active">
+
+<section class="hero">
+  <h1>SELL OFFICIAL</h1>
+  <p>
+    আপনার প্রয়োজনীয় Website, APK/App, Source Code এবং বিভিন্ন ধরনের
+    Digital Products ও Development Services এক জায়গায়।
+  </p>
+
+  <div class="hero-buttons">
+    <button class="btn btn-light" onclick="scrollToSection('productsSection')">🛒 Products</button>
+    <button class="btn btn-dark" onclick="scrollToSection('servicesSection')">🛠️ Services</button>
+    <button class="btn btn-light" onclick="openSupport()">💬 Contact</button>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="section-title">
+    <h2>📂 Categories</h2>
+  </div>
+
+  <div id="categories" class="categories"></div>
+
+  <section id="productsSection">
+    <div class="section-title">
+      <h2>🛒 Digital Products</h2>
+    </div>
+    <div id="productsGrid" class="grid"></div>
+  </section>
+
+  <section id="servicesSection">
+    <div class="section-title">
+      <h2>🛠️ Development Services</h2>
+    </div>
+    <div id="servicesGrid" class="grid"></div>
+  </section>
+
+  <section class="support">
+    <h2>📱 Need Help?</h2>
+    <p>Website, APK, Source Code বা Custom Development-এর জন্য আমাদের সাথে যোগাযোগ করুন।</p>
+    <a class="whatsapp" href="https://wa.me/8801845077415" target="_blank">
+      💬 WhatsApp: 01845077415
+    </a>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <strong>SELL OFFICIAL</strong><br>
+  Websites • APK/Apps • Source Code • Digital Services<br>
+  WhatsApp: 01845077415
+</footer>
+
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp" class="hidden">
+
+<header class="topbar">
+  <div class="logo">SELL OFFICIAL ADMIN</div>
+  <div style="margin-left:auto;display:flex;gap:8px">
+    <button class="btn" style="background:#f1f5f9" onclick="goHome()">🌐 Store</button>
+    <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
+  </div>
+</header>
+
+<div class="admin-layout">
+
+<aside class="sidebar">
+  <h3>⚙️ Admin Panel</h3>
+  <button class="sidebtn active" onclick="adminPage('dashboard',this)">📊 Dashboard</button>
+  <button class="sidebtn" onclick="adminPage('products',this)">🛒 Products</button>
+  <button class="sidebtn" onclick="adminPage('services',this)">🛠️ Services</button>
+  <button class="sidebtn" onclick="adminPage('orders',this)">📦 Orders</button>
+  <button class="sidebtn" onclick="adminPage('payments',this)">💳 Payments</button>
+  <button class="sidebtn" onclick="adminPage('customers',this)">👥 Customers</button>
+  <button class="sidebtn" onclick="adminPage('notifications',this)">🔔 Notifications</button>
+  <button class="sidebtn" onclick="adminPage('coupons',this)">🎟️ Coupons</button>
+  <button class="sidebtn" onclick="adminPage('categories',this)">📂 Categories</button>
+  <button class="sidebtn" onclick="adminPage('settings',this)">⚙️ Settings</button>
+</aside>
+
+<main class="admin-content">
+
+<!-- DASHBOARD -->
+<section id="admin-dashboard" class="admin-page">
+  <div class="section-title">
+    <h2>📊 Dashboard</h2>
+    <button class="btn btn-primary" onclick="loadAdmin()">🔄 Refresh</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Customers</div><div id="statUsers" class="num">0</div></div>
+    <div class="stat"><div class="label">Products</div><div id="statProducts" class="num">0</div></div>
+    <div class="stat"><div class="label">Services</div><div id="statServices" class="num">0</div></div>
+    <div class="stat"><div class="label">Orders</div><div id="statOrders" class="num">0</div></div>
+    <div class="stat"><div class="label">Pending Orders</div><div id="statPending" class="num">0</div></div>
+    <div class="stat"><div class="label">Approved Payments</div><div id="statPayments" class="num">0</div></div>
+  </div>
+
+  <h3 style="margin:20px 0 10px">Recent Orders</h3>
+  <div id="recentOrders"></div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="admin-products" class="admin-page hidden">
+  <div class="section-title">
+    <h2>🛒 Products</h2>
+    <button class="btn btn-primary" onclick="openProductModal()">+ Add Product</button>
+  </div>
+  <input id="productAdminSearch" class="btn" style="background:#fff;border:1px solid #ddd;width:100%;margin-bottom:15px" placeholder="Search products..." oninput="renderAdminProducts()">
+  <div id="adminProductsTable"></div>
+</section>
+
+<!-- SERVICES -->
+<section id="admin-services" class="admin-page hidden">
+  <div class="section-title">
+    <h2>🛠️ Services</h2>
+    <button class="btn btn-primary" onclick="openServiceModal()">+ Add Service</button>
+  </div>
+  <div id="adminServicesTable"></div>
+</section>
+
+<!-- ORDERS -->
+<section id="admin-orders" class="admin-page hidden">
+  <div class="section-title"><h2>📦 Orders</h2></div>
+  <input id="orderSearch" class="btn" style="background:#fff;border:1px solid #ddd;width:100%;margin-bottom:15px" placeholder="Search order..." oninput="renderAdminOrders()">
+  <div id="adminOrdersTable"></div>
+</section>
+
+<!-- PAYMENTS -->
+<section id="admin-payments" class="admin-page hidden">
+  <div class="section-title"><h2>💳 Payments</h2></div>
+  <div id="paymentStats" class="stats"></div>
+  <div id="adminPaymentsTable"></div>
+</section>
+
+<!-- CUSTOMERS -->
+<section id="admin-customers" class="admin-page hidden">
+  <div class="section-title"><h2>👥 Customers</h2></div>
+  <input id="customerSearch" class="btn" style="background:#fff;border:1px solid #ddd;width:100%;margin-bottom:15px" placeholder="Search customer..." oninput="renderCustomers()">
+  <div id="customersTable"></div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section id="admin-notifications" class="admin-page hidden">
+  <div class="section-title">
+    <h2>🔔 Notifications</h2>
+    <button class="btn btn-primary" onclick="openNotificationModal()">+ Send Notification</button>
+  </div>
+  <div id="notificationsTable"></div>
+</section>
+
+<!-- COUPONS -->
+<section id="admin-coupons" class="admin-page hidden">
+  <div class="section-title">
+    <h2>🎟️ Coupons</h2>
+    <button class="btn btn-primary" onclick="openCouponModal()">+ Add Coupon</button>
+  </div>
+  <div id="couponsTable"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="admin-categories" class="admin-page hidden">
+  <div class="section-title">
+    <h2>📂 Categories</h2>
+    <button class="btn btn-primary" onclick="openCategoryModal()">+ Add Category</button>
+  </div>
+  <div id="categoriesTable"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="admin-settings" class="admin-page hidden">
+  <div class="section-title"><h2>⚙️ Store Settings</h2></div>
+
+  <div class="card" style="padding:20px">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Store Name</label>
+        <input id="setName" value="Sell Official">
+      </div>
+      <div class="form-group">
+        <label>Support Email</label>
+        <input id="setEmail" value="jblsongrimix999@gmail.com">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input id="setWhatsapp" value="01845077415">
+      </div>
+      <div class="form-group">
+        <label>Facebook URL</label>
+        <input id="setFacebook">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>bKash Number</label>
+        <input id="setBkash">
+      </div>
+      <div class="form-group">
+        <label>Nagad Number</label>
+        <input id="setNagad">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Rocket Number</label>
+      <input id="setRocket">
+    </div>
+
+    <div class="form-group">
+      <label>Payment Instructions</label>
+      <textarea id="setPaymentInstructions"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Delivery Instructions</label>
+      <textarea id="setDeliveryInstructions"></textarea>
+    </div>
+
+    <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2 id="productModalTitle">Add Product</h2>
+<button class="close" onclick="closeModal('productModal')">✕</button>
+</div>
+
+<input id="productId" type="hidden">
+
+<div class="form-group">
+<label>Product Name</label>
+<input id="productName" placeholder="Example: Business Website">
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Type</label>
+<select id="productType">
+<option>Website</option>
+<option>APK / App</option>
+<option>Source Code</option>
+<option>Frontend Code</option>
+<option>Backend Code</option>
+<option>API / Integration</option>
+<option>Digital Product</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<input id="productCategory" placeholder="Website">
+</div>
+</div>
+
+<div class="form-group">
+<label>Product Image URL</label>
+<input id="productImage" placeholder="https://example.com/image.jpg">
+</div>
+
+<div class="form-group">
+<label>Short Description</label>
+<textarea id="productShort"></textarea>
+</div>
+
+<div class="form-group">
+<label>Full Description</label>
+<textarea id="productDescription"></textarea>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Full Price (BDT)</label>
+<input id="productPrice" type="number">
+</div>
+<div class="form-group">
+<label>Advance Price (BDT)</label>
+<input id="productAdvance" type="number">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Due Price (BDT)</label>
+<input id="productDue" type="number">
+</div>
+<div class="form-group">
+<label>Version</label>
+<input id="productVersion" placeholder="1.0.0">
+</div>
+</div>
+
+<div class="form-group">
+<label>Live Demo URL</label>
+<input id="productDemo" placeholder="https://...">
+</div>
+
+<div class="form-group">
+<label>Delivery / Download URL</label>
+<input id="productDelivery" placeholder="https://...">
+</div>
+
+<div class="form-group">
+<label>Features</label>
+<textarea id="productFeatures" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Active</label>
+<select id="productActive">
+<option value="true">Yes</option>
+<option value="false">No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Featured</label>
+<select id="productFeatured">
+<option value="false">No</option>
+<option value="true">Yes</option>
+</select>
+</div>
+</div>
+
+<button class="btn btn-primary" style="width:100%" onclick="saveProduct()">💾 Save Product</button>
+</div>
+</div>
+
+<!-- SERVICE MODAL -->
+<div id="serviceModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>Service</h2>
+<button class="close" onclick="closeModal('serviceModal')">✕</button>
+</div>
+
+<input id="serviceId" type="hidden">
+
+<div class="form-group">
+<label>Service Name</label>
+<input id="serviceName">
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<input id="serviceCategory" placeholder="Development">
+</div>
+
+<div class="form-group">
+<label>Image URL</label>
+<input id="serviceImage" placeholder="https://...">
+</div>
+
+<div class="form-group">
+<label>Description</label>
+<textarea id="serviceDescription"></textarea>
+</div>
+
+<div class="form-group">
+<label>Starting Price</label>
+<input id="servicePrice" type="number">
+</div>
+
+<div class="form-group">
+<label>Features</label>
+<textarea id="serviceFeatures"></textarea>
+</div>
+
+<div class="form-group">
+<label>Active</label>
+<select id="serviceActive">
+<option value="true">Yes</option>
+<option value="false">No</option>
+</select>
+</div>
+
+<button class="btn btn-primary" style="width:100%" onclick="saveService()">💾 Save Service</button>
+</div>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="orderModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>📦 Order</h2>
+<button class="close" onclick="closeModal('orderModal')">✕</button>
+</div>
+<div id="orderDetails"></div>
+</div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>💳 Payment</h2>
+<button class="close" onclick="closeModal('paymentModal')">✕</button>
+</div>
+
+<input id="paymentOrderId" type="hidden">
+<input id="paymentProductName" type="hidden">
+
+<div class="form-group">
+<label>Payment Method</label>
+<select id="paymentMethod">
+<option>bKash</option>
+<option>Nagad</option>
+<option>Rocket</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Amount</label>
+<input id="paymentAmount" type="number">
+</div>
+
+<div class="form-group">
+<label>Transaction ID</label>
+<input id="paymentTxn" placeholder="Transaction ID">
+</div>
+
+<button class="btn btn-primary" style="width:100%" onclick="submitPayment()">Submit Payment</button>
+</div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>👤 My Profile</h2>
+<button class="close" onclick="closeModal('profileModal')">✕</button>
+</div>
+<div class="form-group"><label>Name</label><input id="profileName"></div>
+<div class="form-group"><label>Username</label><input id="profileUsername"></div>
+<div class="form-group"><label>Phone</label><input id="profilePhone"></div>
+<div class="form-group"><label>Email</label><input id="profileEmail" readonly></div>
+<div class="form-group"><label>Address</label><textarea id="profileAddress"></textarea></div>
+<button class="btn btn-primary" style="width:100%" onclick="saveProfile()">Save Profile</button>
+</div>
+</div>
+
+<!-- NOTIFICATION MODAL -->
+<div id="notificationModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>🔔 Send Notification</h2>
+<button class="close" onclick="closeModal('notificationModal')">✕</button>
+</div>
+<div class="form-group">
+<label>User ID</label>
+<input id="notificationUserId" placeholder="Firebase User UID">
+</div>
+<div class="form-group">
+<label>Title</label>
+<input id="notificationTitle">
+</div>
+<div class="form-group">
+<label>Message</label>
+<textarea id="notificationMessage"></textarea>
+</div>
+<button class="btn btn-primary" style="width:100%" onclick="sendNotification()">Send</button>
+</div>
+</div>
+
+<!-- COUPON MODAL -->
+<div id="couponModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>🎟️ Coupon</h2>
+<button class="close" onclick="closeModal('couponModal')">✕</button>
+</div>
+<div class="form-group"><label>Coupon Code</label><input id="couponCode"></div>
+<div class="form-row">
+<div class="form-group"><label>Discount %</label><input id="couponDiscount" type="number"></div>
+<div class="form-group"><label>Active</label><select id="couponActive"><option value="true">Yes</option><option value="false">No</option></select></div>
+</div>
+<button class="btn btn-primary" style="width:100%" onclick="saveCoupon()">Save Coupon</button>
+</div>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div id="categoryModal" class="modal hidden">
+<div class="modal-box">
+<div class="modal-head">
+<h2>📂 Category</h2>
+<button class="close" onclick="closeModal('categoryModal')">✕</button>
+</div>
+<div class="form-group"><label>Category Name</label><input id="categoryName"></div>
+<div class="form-group"><label>Type</label><input id="categoryType" placeholder="Product / Service"></div>
+<button class="btn btn-primary" style="width:100%" onclick="saveCategory()">Save Category</button>
+</div>
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+ getAuth,
+ createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,
+ sendPasswordResetEmail,
+ signOut,
+ onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+import {
+ getFirestore,
+ collection,
+ doc,
+ getDoc,
+ getDocs,
+ addDoc,
+ setDoc,
+ updateDoc,
+ deleteDoc,
+ serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+ apiKey:"AIzaSyCrnY92pSr_jjXhim2hT0JBhz8NEIHgrn0",
+ authDomain:"sell-official.firebaseapp.com",
+ projectId:"sell-official",
+ storageBucket:"sell-official.firebasestorage.app",
+ messagingSenderId:"518778129904",
+ appId:"1:518778129904:web:4eaa33bb77392c414e6135"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const ADMIN_EMAIL="jblsongrimix999@gmail.com";
+const WHATSAPP="8801845077415";
+
+let currentUser=null;
+let products=[];
+let services=[];
+let orders=[];
+let payments=[];
+let users=[];
+let categories=[];
+let coupons=[];
+let notifications=[];
+
+
+/* =========================
+   HELPERS
+========================= */
+
+window.showToast=function(message){
+ const t=document.getElementById("toast");
+ t.textContent=message;
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",3000);
+};
+
+function esc(value){
+ if(value===undefined||value===null)return "";
+ return String(value)
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
+}
+
+function money(v){
+ return "৳"+Number(v||0).toLocaleString("en-BD");
+}
+
+function bool(v){
+ return v===true || v==="true";
+}
+
+function dateText(v){
+ if(!v)return "-";
+ try{
+   if(v.toDate)return v.toDate().toLocaleString("en-BD");
+   return new Date(v).toLocaleString("en-BD");
+ }catch{return "-"}
+}
+
+async function getCollection(name){
+ try{
+   const snap=await getDocs(collection(db,name));
+   return snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){
+   console.error(name,e);
+   showToast("Load error: "+name);
+   return [];
+ }
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.add("hidden");
+}
+window.closeModal=closeModal;
+
+
+/* =========================
+   AUTH
+========================= */
+
+window.showAuth=function(type){
+ const login=type==="login";
+
+ document.getElementById("loginForm").classList.toggle("hidden",!login);
+ document.getElementById("registerForm").classList.toggle("hidden",login);
+
+ document.getElementById("loginTab").classList.toggle("active",login);
+ document.getElementById("registerTab").classList.toggle("active",!login);
+};
+
+window.loginUser=async function(){
+ const email=document.getElementById("loginEmail").value.trim();
+ const password=document.getElementById("loginPassword").value;
+
+ if(!email||!password){
+   showToast("Email ও Password দিন");
+   return;
+ }
+
+ try{
+   await signInWithEmailAndPassword(auth,email,password);
+   showToast("Login successful");
+ }catch(e){
+   console.error(e);
+   showToast(authError(e));
+ }
+};
+
+window.registerUser=async function(){
+
+ const name=document.getElementById("regName").value.trim();
+ const username=document.getElementById("regUsername").value.trim();
+ const phone=document.getElementById("regPhone").value.trim();
+ const email=document.getElementById("regEmail").value.trim();
+ const password=document.getElementById("regPassword").value;
+
+ if(!name||!username||!email||!password){
+   showToast("সব প্রয়োজনীয় তথ্য দিন");
+   return;
+ }
+
+ if(password.length<6){
+   showToast("Password কমপক্ষে 6 অক্ষরের হতে হবে");
+   return;
+ }
+
+ try{
+
+   const cred=await createUserWithEmailAndPassword(auth,email,password);
+
+   await setDoc(doc(db,"users",cred.user.uid),{
+     name,
+     username,
+     phone,
+     email,
+     photoURL:"",
+     address:"",
+     createdAt:serverTimestamp(),
+     updatedAt:serverTimestamp(),
+     blocked:false
+   });
+
+   showToast("Account তৈরি হয়েছে");
+
+ }catch(e){
+   console.error(e);
+   showToast(authError(e));
+ }
+};
+
+window.forgotPassword=async function(){
+
+ const email=document.getElementById("loginEmail").value.trim();
+
+ if(!email){
+   showToast("আগে Email লিখুন");
+   return;
+ }
+
+ try{
+   await sendPasswordResetEmail(auth,email);
+   showToast("Password reset email পাঠানো হয়েছে");
+ }catch(e){
+   showToast(authError(e));
+ }
+};
+
+window.logoutUser=async function(){
+ try{
+   await signOut(auth);
+ }catch(e){
+   console.error(e);
+ }
+};
+
+function authError(e){
+ const code=e.code||"";
+
+ if(code.includes("invalid-credential"))
+   return "Email অথবা Password ভুল";
+ if(code.includes("email-already-in-use"))
+   return "এই Email দিয়ে আগে থেকেই Account আছে";
+ if(code.includes("invalid-email"))
+   return "Email সঠিক নয়";
+ if(code.includes("weak-password"))
+   return "Password আরও শক্তিশালী দিন";
+ if(code.includes("network"))
+   return "Internet connection check করুন";
+
+ return e.message||"Authentication error";
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth,async user=>{
+
+ currentUser=user;
+
+ if(!user){
+   document.getElementById("authScreen").classList.remove("hidden");
+   document.getElementById("customerApp").classList.add("hidden");
+   document.getElementById("adminApp").classList.add("hidden");
+   return;
+ }
+
+ if(user.email && user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase()){
+
+   document.getElementById("authScreen").classList.add("hidden");
+   document.getElementById("customerApp").classList.add("hidden");
+   document.getElementById("adminApp").classList.remove("hidden");
+
+   await loadAdmin();
+
+ }else{
+
+   document.getElementById("authScreen").classList.add("hidden");
+   document.getElementById("adminApp").classList.add("hidden");
+   document.getElementById("customerApp").classList.remove("hidden");
+
+   await loadCustomerProfile();
+   await loadCustomerData();
+ }
+});
+
+
+/* =========================
+   CUSTOMER
+========================= */
+
+async function loadCustomerProfile(){
+
+ if(!currentUser)return;
+
+ try{
+   const snap=await getDoc(doc(db,"users",currentUser.uid));
+
+   let name=currentUser.email.split("@")[0];
+
+   if(snap.exists()){
+     name=snap.data().name||name;
+   }
+
+   document.getElementById("topUserName").textContent=name;
+
+ }catch(e){
+   console.error(e);
+ }
+}
+
+async function loadCustomerData(){
+
+ products=await getCollection("products");
+ services=await getCollection("services");
+ categories=await getCollection("categories");
+
+ renderCustomer();
+}
+
+function renderCustomer(){
+
+ const search=(document.getElementById("searchInput")?.value||"").toLowerCase();
+
+ let p=products.filter(x=>bool(x.active));
+
+ if(search){
+   p=p.filter(x=>
+     String(x.name||"").toLowerCase().includes(search)||
+     String(x.category||"").toLowerCase().includes(search)||
+     String(x.type||"").toLowerCase().includes(search)||
+     String(x.shortDescription||"").toLowerCase().includes(search)
+   );
+ }
+
+ const pg=document.getElementById("productsGrid");
+
+ if(!p.length){
+   pg.innerHTML='<div class="empty">কোনো Product পাওয়া যায়নি।</div>';
+ }else{
+   pg.innerHTML=p.map(productCard).join("");
+ }
+
+ let s=services.filter(x=>bool(x.active));
+
+ if(search){
+   s=s.filter(x=>
+     String(x.name||"").toLowerCase().includes(search)||
+     String(x.category||"").toLowerCase().includes(search)
+   );
+ }
+
+ const sg=document.getElementById("servicesGrid");
+
+ if(!s.length){
+   sg.innerHTML='<div class="empty">কোনো Service পাওয়া যায়নি।</div>';
+ }else{
+   sg.innerHTML=s.map(serviceCard).join("");
+ }
+
+ const cg=document.getElementById("categories");
+
+ cg.innerHTML=
+   '<button class="cat" onclick="clearSearch()">All</button>'+
+   categories.map(c=>`
+     <button class="cat" onclick="filterCategory('${esc(c.name)}')">
+       ${esc(c.name)}
+     </button>
+   `).join("");
+}
+
+function productCard(p){
+
+ const img=p.imageURL||p.imageUrl||"";
+
+ return `
+ <div class="card">
+   <div class="card-img">
+     ${img
+       ? `<img src="${esc(img)}" alt="${esc(p.name)}" onerror="this.style.display='none'">`
+       : `<span style="font-size:45px">📦</span>`
+     }
+   </div>
+
+   <div class="card-body">
+     ${bool(p.featured)?'<span class="badge badge-yellow">⭐ Featured</span>':''}
+
+     <h3>${esc(p.name)}</h3>
+
+     <div class="tags">
+       <span class="tag">${esc(p.type)}</span>
+       <span class="tag">${esc(p.category)}</span>
+     </div>
+
+     <p class="desc">${esc(p.shortDescription)}</p>
+
+     <div class="price">
+       ${money(p.price)}
+       ${p.advancePrice?`<small> Advance ${money(p.advancePrice)}</small>`:""}
+     </div>
+
+     <button class="btn btn-primary" style="width:100%" onclick="openProduct('${p.id}')">
+       View Details
+     </button>
+   </div>
+ </div>`;
+}
+
+function serviceCard(s){
+
+ return `
+ <div class="card">
+   <div class="card-img">
+     ${s.imageURL
+       ? `<img src="${esc(s.imageURL)}" alt="${esc(s.name)}">`
+       : `<span style="font-size:45px">🛠️</span>`
+     }
+   </div>
+
+   <div class="card-body">
+     <h3>${esc(s.name)}</h3>
+     <div class="tags">
+       <span class="tag">${esc(s.category)}</span>
+     </div>
+     <p class="desc">${esc(s.description)}</p>
+     <div class="price">From ${money(s.price)}</div>
+
+     <button class="btn btn-primary" style="width:100%" onclick="openService('${s.id}')">
+       Order Service
+     </button>
+   </div>
+ </div>`;
+}
+
+window.clearSearch=function(){
+ document.getElementById("searchInput").value="";
+ renderCustomer();
+};
+
+window.filterCategory=function(category){
+ const input=document.getElementById("searchInput");
+ input.value=category;
+ renderCustomer();
+ scrollToSection("productsSection");
+};
+
+window.scrollToSection=function(id){
+ document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+};
+
+window.goHome=function(){
+ document.getElementById("adminApp").classList.add("hidden");
+ if(currentUser && currentUser.email!==ADMIN_EMAIL){
+   document.getElementById("customerApp").classList.remove("hidden");
+ }
+ window.scrollTo(0,0);
+};
+
+window.toggleUserMenu=function(){
+ document.getElementById("userMenu").classList.toggle("hidden");
+};
+
+window.openSupport=function(){
+ window.open("https://wa.me/"+WHATSAPP,"_blank");
+};
+
+window.openProduct=function(id){
+
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ const features=String(p.features||"")
+ .split("\n")
+ .filter(Boolean)
+ .map(x=>`<li>${esc(x)}</li>`)
+ .join("");
+
+ document.getElementById("orderDetails").innerHTML=`
+   <h2>${esc(p.name)}</h2>
+   <p class="desc" style="margin:10px 0">${esc(p.description||p.shortDescription)}</p>
+
+   <div class="price">${money(p.price)}</div>
+
+   <p><b>Advance:</b> ${money(p.advancePrice)}</p>
+   <p><b>Due:</b> ${money(p.duePrice)}</p>
+
+   ${features?`<h3 style="margin-top:15px">Features</h3><ul style="line-height:2;padding-left:20px">${features}</ul>`:""}
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px">
+     ${p.demoURL?`<a class="btn btn-dark" href="${esc(p.demoURL)}" target="_blank">🌐 Live Demo</a>`:""}
+
+     <button class="btn btn-primary" onclick="createOrder('${p.id}','product')">
+       🛒 Order Now
+     </button>
+   </div>
+ `;
+
+ document.getElementById("orderModal").classList.remove("hidden");
+};
+
+window.openService=function(id){
+
+ const s=services.find(x=>x.id===id);
+ if(!s)return;
+
+ document.getElementById("orderDetails").innerHTML=`
+   <h2>${esc(s.name)}</h2>
+   <p class="desc" style="margin:10px 0">${esc(s.description)}</p>
+   <div class="price">Starting ${money(s.price)}</div>
+
+   <p style="margin-bottom:15px">${esc(s.features||"")}</p>
+
+   <button class="btn btn-primary" style="width:100%"
+     onclick="createOrder('${s.id}','service')">
+     🛠️ Order This Service
+   </button>
+ `;
+
+ document.getElementById("orderModal").classList.remove("hidden");
+};
+
+
+/* =========================
+   CREATE ORDER
+========================= */
+
+window.createOrder=async function(itemId,type){
+
+ if(!currentUser){
+   showToast("আগে Login করুন");
+   return;
+ }
+
+ const item=type==="product"
+   ?products.find(x=>x.id===itemId)
+   :services.find(x=>x.id===itemId);
+
+ if(!item)return;
+
+ try{
+
+   const orderData={
+     userId:currentUser.uid,
+     userEmail:currentUser.email,
+     itemId,
+     itemType:type,
+     itemName:item.name,
+     amount:Number(item.price||0),
+     advance:Number(item.advancePrice||item.price||0),
+     due:Number(item.duePrice||0),
+     status:"Pending",
+     createdAt:serverTimestamp(),
+     updatedAt:serverTimestamp()
+   };
+
+   const ref=await addDoc(collection(db,"orders"),orderData);
+
+   closeModal("orderModal");
+
+   showToast("Order তৈরি হয়েছে");
+
+   setTimeout(()=>{
+     openPaymentForOrder(ref.id,item.name,orderData.advance);
+   },400);
+
+ }catch(e){
+   console.error(e);
+   showToast("Order তৈরি করা যায়নি: "+e.message);
+ }
+};
+
+
+/* =========================
+   PAYMENT
+========================= */
+
+function openPaymentForOrder(id,name,amount){
+
+ document.getElementById("paymentOrderId").value=id;
+ document.getElementById("paymentProductName").value=name;
+ document.getElementById("paymentAmount").value=amount||"";
+
+ document.getElementById("paymentModal").classList.remove("hidden");
+}
+
+window.submitPayment=async function(){
+
+ const orderId=document.getElementById("paymentOrderId").value;
+ const method=document.getElementById("paymentMethod").value;
+ const amount=Number(document.getElementById("paymentAmount").value);
+ const txn=document.getElementById("paymentTxn").value.trim();
+
+ if(!orderId||!amount||!txn){
+   showToast("সব Payment তথ্য দিন");
+   return;
+ }
+
+ try{
+
+   await addDoc(collection(db,"payments"),{
+     userId:currentUser.uid,
+     userEmail:currentUser.email,
+     orderId,
+     method,
+     amount,
+     transactionId:txn,
+     status:"Pending",
+     createdAt:serverTimestamp()
+   });
+
+   closeModal("paymentModal");
+   showToast("Payment submitted. Admin verification করবে।");
+
+ }catch(e){
+   console.error(e);
+   showToast("Payment submit error: "+e.message);
+ }
+};
+
+
+/* =========================
+   PROFILE
+========================= */
+
+window.openProfile=async function(){
+
+ document.getElementById("userMenu").classList.add("hidden");
+
+ try{
+   const snap=await getDoc(doc(db,"users",currentUser.uid));
+
+   const d=snap.exists()?snap.data():{};
+
+   document.getElementById("profileName").value=d.name||"";
+   document.getElementById("profileUsername").value=d.username||"";
+   document.getElementById("profilePhone").value=d.phone||"";
+   document.getElementById("profileEmail").value=currentUser.email||"";
+   document.getElementById("profileAddress").value=d.address||"";
+
+   document.getElementById("profileModal").classList.remove("hidden");
+
+ }catch(e){
+   showToast("Profile load error");
+ }
+};
+
+window.saveProfile=async function(){
+
+ try{
+
+   await updateDoc(doc(db,"users",currentUser.uid),{
+     name:document.getElementById("profileName").value.trim(),
+     username:document.getElementById("profileUsername").value.trim(),
+     phone:document.getElementById("profilePhone").value.trim(),
+     address:document.getElementById("profileAddress").value.trim(),
+     updatedAt:serverTimestamp()
+   });
+
+   closeModal("profileModal");
+   await loadCustomerProfile();
+
+   showToast("Profile updated");
+
+ }catch(e){
+   console.error(e);
+   showToast("Profile update error: "+e.message);
+ }
+};
+
+window.openOrders=async function(){
+
+ document.getElementById("userMenu").classList.add("hidden");
+
+ orders=await getCollection("orders");
+ orders=orders.filter(x=>x.userId===currentUser.uid);
+
+ document.getElementById("orderDetails").innerHTML=`
+
+ <h2>📦 My Orders</h2>
+
+ ${
+ orders.length
+ ? orders.map(o=>`
+   <div style="border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin-top:12px">
+     <b>${esc(o.itemName)}</b>
+     <p>Amount: ${money(o.amount)}</p>
+     <p>Status:
+       <span class="badge badge-blue">${esc(o.status)}</span>
+     </p>
+     <p style="color:#64748b;font-size:12px">${dateText(o.createdAt)}</p>
+   </div>
+ `).join("")
+ : '<div class="empty" style="margin-top:15px">কোনো Order নেই।</div>'
+ }
+
+ `;
+
+ document.getElementById("orderModal").classList.remove("hidden");
+};
+
+
+/* =========================
+   ADMIN
+========================= */
+
+window.adminPage=function(page,button){
+
+ document.querySelectorAll(".admin-page")
+ .forEach(x=>x.classList.add("hidden"));
+
+ document.getElementById("admin-"+page)
+ .classList.remove("hidden");
+
+ document.querySelectorAll(".sidebtn")
+ .forEach(x=>x.classList.remove("active"));
+
+ if(button)button.classList.add("active");
+
+ if(page==="products")renderAdminProducts();
+ if(page==="services")renderAdminServices();
+ if(page==="orders")renderAdminOrders();
+ if(page==="payments")renderAdminPayments();
+ if(page==="customers")renderCustomers();
+ if(page==="notifications")renderNotifications();
+ if(page==="coupons")renderCoupons();
+ if(page==="categories")renderCategories();
+ if(page==="settings")loadSettings();
+};
+
+window.loadAdmin=async function(){
+
+ products=await getCollection("products");
+ services=await getCollection("services");
+ orders=await getCollection("orders");
+ payments=await getCollection("payments");
+ users=await getCollection("users");
+ categories=await getCollection("categories");
+ coupons=await getCollection("coupons");
+ notifications=await getCollection("notifications");
+
+ document.getElementById("statUsers").textContent=users.length;
+ document.getElementById("statProducts").textContent=products.length;
+ document.getElementById("statServices").textContent=services.length;
+ document.getElementById("statOrders").textContent=orders.length;
+ document.getElementById("statPending").textContent=
+   orders.filter(x=>x.status==="Pending").length;
+ document.getElementById("statPayments").textContent=
+   payments.filter(x=>x.status==="Approved").length;
+
+ renderRecentOrders();
+};
+
+function renderRecentOrders(){
+
+ const data=[...orders].slice(-10).reverse();
+
+ document.getElementById("recentOrders").innerHTML=data.length
+ ? `
+ <div class="admin-table-wrap">
+ <table>
+ <tr><th>Item</th><th>User</th><th>Amount</th><th>Status</th><th>Date</th></tr>
+ ${data.map(o=>`
+ <tr>
+   <td>${esc(o.itemName)}</td>
+   <td>${esc(o.userEmail)}</td>
+   <td>${money(o.amount)}</td>
+   <td><span class="badge badge-blue">${esc(o.status)}</span></td>
+   <td>${dateText(o.createdAt)}</td>
+ </tr>
+ `).join("")}
+ </table>
+ </div>`
+ : '<div class="empty">No orders</div>';
+}
+
+
+/* =========================
+   ADMIN PRODUCTS
+========================= */
+
+function renderAdminProducts(){
+
+ const q=(document.getElementById("productAdminSearch")?.value||"").toLowerCase();
+
+ const data=products.filter(p=>
+   String(p.name||"").toLowerCase().includes(q)||
+   String(p.category||"").toLowerCase().includes(q)||
+   String(p.type||"").toLowerCase().includes(q)
+ );
+
+ document.getElementById("adminProductsTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr>
+ <th>Name</th><th>Type</th><th>Price</th>
+ <th>Status</th><th>Featured</th><th>Action</th>
+ </tr>
+
+ ${data.map(p=>`
+ <tr>
+ <td>${esc(p.name)}</td>
+ <td>${esc(p.type)}</td>
+ <td>${money(p.price)}</td>
+ <td>${bool(p.active)
+   ?'<span class="badge badge-green">Active</span>'
+   :'<span class="badge badge-red">Inactive</span>'}</td>
+ <td>${bool(p.featured)?"⭐":"-"}</td>
+ <td>
+   <button class="btn btn-warning" onclick="editProduct('${p.id}')">Edit</button>
+   <button class="btn btn-danger" onclick="deleteProduct('${p.id}')">Delete</button>
+ </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.openProductModal=function(){
+
+ document.getElementById("productModalTitle").textContent="Add Product";
+ document.getElementById("productId").value="";
+ document.getElementById("productName").value="";
+ document.getElementById("productImage").value="";
+ document.getElementById("productShort").value="";
+ document.getElementById("productDescription").value="";
+ document.getElementById("productPrice").value="";
+ document.getElementById("productAdvance").value="";
+ document.getElementById("productDue").value="";
+ document.getElementById("productVersion").value="";
+ document.getElementById("productDemo").value="";
+ document.getElementById("productDelivery").value="";
+ document.getElementById("productFeatures").value="";
+ document.getElementById("productCategory").value="";
+ document.getElementById("productActive").value="true";
+ document.getElementById("productFeatured").value="false";
+
+ document.getElementById("productModal").classList.remove("hidden");
+};
+
+window.editProduct=function(id){
+
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ document.getElementById("productModalTitle").textContent="Edit Product";
+
+ document.getElementById("productId").value=id;
+ document.getElementById("productName").value=p.name||"";
+ document.getElementById("productType").value=p.type||"Website";
+ document.getElementById("productCategory").value=p.category||"";
+ document.getElementById("productImage").value=p.imageURL||"";
+ document.getElementById("productShort").value=p.shortDescription||"";
+ document.getElementById("productDescription").value=p.description||"";
+ document.getElementById("productPrice").value=p.price||"";
+ document.getElementById("productAdvance").value=p.advancePrice||"";
+ document.getElementById("productDue").value=p.duePrice||"";
+ document.getElementById("productVersion").value=p.version||"";
+ document.getElementById("productDemo").value=p.demoURL||"";
+ document.getElementById("productDelivery").value=p.deliveryURL||"";
+ document.getElementById("productFeatures").value=p.features||"";
+ document.getElementById("productActive").value=String(bool(p.active));
+ document.getElementById("productFeatured").value=String(bool(p.featured));
+
+ document.getElementById("productModal").classList.remove("hidden");
+};
+
+window.saveProduct=async function(){
+
+ const id=document.getElementById("productId").value;
+
+ const data={
+   name:document.getElementById("productName").value.trim(),
+   type:document.getElementById("productType").value,
+   category:document.getElementById("productCategory").value.trim(),
+   imageURL:document.getElementById("productImage").value.trim(),
+   shortDescription:document.getElementById("productShort").value.trim(),
+   description:document.getElementById("productDescription").value.trim(),
+   price:Number(document.getElementById("productPrice").value||0),
+   advancePrice:Number(document.getElementById("productAdvance").value||0),
+   duePrice:Number(document.getElementById("productDue").value||0),
+   version:document.getElementById("productVersion").value.trim(),
+   demoURL:document.getElementById("productDemo").value.trim(),
+   deliveryURL:document.getElementById("productDelivery").value.trim(),
+   features:document.getElementById("productFeatures").value,
+   active:document.getElementById("productActive").value==="true",
+   featured:document.getElementById("productFeatured").value==="true",
+   updatedAt:serverTimestamp()
+ };
+
+ if(!data.name){
+   showToast("Product Name দিন");
+   return;
+ }
+
+ try{
+
+   if(id){
+     await updateDoc(doc(db,"products",id),data);
+     showToast("Product updated");
+   }else{
+     data.createdAt=serverTimestamp();
+     await addDoc(collection(db,"products"),data);
+     showToast("Product added");
+   }
+
+   closeModal("productModal");
+   products=await getCollection("products");
+   renderAdminProducts();
+
+ }catch(e){
+   console.error(e);
+   showToast("Product save error: "+e.message);
+ }
+};
+
+window.deleteProduct=async function(id){
+
+ if(!confirm("এই Product delete করবেন?"))return;
+
+ try{
+   await deleteDoc(doc(db,"products",id));
+   products=products.filter(x=>x.id!==id);
+   renderAdminProducts();
+   showToast("Product deleted");
+ }catch(e){
+   showToast("Delete error: "+e.message);
+ }
+};
+
+
+/* =========================
+   ADMIN SERVICES
+========================= */
+
+function renderAdminServices(){
+
+ document.getElementById("adminServicesTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th>Action</th></tr>
+
+ ${services.map(s=>`
+ <tr>
+   <td>${esc(s.name)}</td>
+   <td>${esc(s.category)}</td>
+   <td>${money(s.price)}</td>
+   <td>${bool(s.active)
+     ?'<span class="badge badge-green">Active</span>'
+     :'<span class="badge badge-red">Inactive</span>'}</td>
+   <td>
+     <button class="btn btn-warning" onclick="editService('${s.id}')">Edit</button>
+     <button class="btn btn-danger" onclick="deleteService('${s.id}')">Delete</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.openServiceModal=function(){
+
+ document.getElementById("serviceId").value="";
+ document.getElementById("serviceName").value="";
+ document.getElementById("serviceCategory").value="";
+ document.getElementById("serviceImage").value="";
+ document.getElementById("serviceDescription").value="";
+ document.getElementById("servicePrice").value="";
+ document.getElementById("serviceFeatures").value="";
+ document.getElementById("serviceActive").value="true";
+
+ document.getElementById("serviceModal").classList.remove("hidden");
+};
+
+window.editService=function(id){
+
+ const s=services.find(x=>x.id===id);
+ if(!s)return;
+
+ document.getElementById("serviceId").value=id;
+ document.getElementById("serviceName").value=s.name||"";
+ document.getElementById("serviceCategory").value=s.category||"";
+ document.getElementById("serviceImage").value=s.imageURL||"";
+ document.getElementById("serviceDescription").value=s.description||"";
+ document.getElementById("servicePrice").value=s.price||"";
+ document.getElementById("serviceFeatures").value=s.features||"";
+ document.getElementById("serviceActive").value=String(bool(s.active));
+
+ document.getElementById("serviceModal").classList.remove("hidden");
+};
+
+window.saveService=async function(){
+
+ const id=document.getElementById("serviceId").value;
+
+ const data={
+   name:document.getElementById("serviceName").value.trim(),
+   category:document.getElementById("serviceCategory").value.trim(),
+   imageURL:document.getElementById("serviceImage").value.trim(),
+   description:document.getElementById("serviceDescription").value.trim(),
+   price:Number(document.getElementById("servicePrice").value||0),
+   features:document.getElementById("serviceFeatures").value,
+   active:document.getElementById("serviceActive").value==="true",
+   updatedAt:serverTimestamp()
+ };
+
+ if(!data.name){
+   showToast("Service Name দিন");
+   return;
+ }
+
+ try{
+
+   if(id){
+     await updateDoc(doc(db,"services",id),data);
+     showToast("Service updated");
+   }else{
+     data.createdAt=serverTimestamp();
+     await addDoc(collection(db,"services"),data);
+     showToast("Service added");
+   }
+
+   closeModal("serviceModal");
+   services=await getCollection("services");
+   renderAdminServices();
+
+ }catch(e){
+   console.error(e);
+   showToast("Service save error: "+e.message);
+ }
+};
+
+window.deleteService=async function(id){
+
+ if(!confirm("এই Service delete করবেন?"))return;
+
+ try{
+   await deleteDoc(doc(db,"services",id));
+   services=services.filter(x=>x.id!==id);
+   renderAdminServices();
+   showToast("Service deleted");
+ }catch(e){
+   showToast("Delete error: "+e.message);
+ }
+};
+
+
+/* =========================
+   ADMIN ORDERS
+========================= */
+
+function renderAdminOrders(){
+
+ const q=(document.getElementById("orderSearch")?.value||"").toLowerCase();
+
+ const data=orders.filter(o=>
+   String(o.itemName||"").toLowerCase().includes(q)||
+   String(o.userEmail||"").toLowerCase().includes(q)||
+   String(o.status||"").toLowerCase().includes(q)
+ );
+
+ document.getElementById("adminOrdersTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr>
+ <th>Item</th><th>Customer</th><th>Amount</th>
+ <th>Status</th><th>Date</th><th>Action</th>
+ </tr>
+
+ ${data.map(o=>`
+ <tr>
+   <td>${esc(o.itemName)}</td>
+   <td>${esc(o.userEmail)}</td>
+   <td>${money(o.amount)}</td>
+   <td>
+     <select onchange="changeOrderStatus('${o.id}',this.value)">
+       ${["Pending","Confirmed","Processing","Requirements","Preview","Ready","Delivered","Completed","Cancelled"]
+       .map(s=>`<option ${o.status===s?"selected":""}>${s}</option>`).join("")}
+     </select>
+   </td>
+   <td>${dateText(o.createdAt)}</td>
+   <td>
+     <button class="btn btn-dark" onclick="viewAdminOrder('${o.id}')">View</button>
+     <button class="btn btn-danger" onclick="deleteOrder('${o.id}')">Delete</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.changeOrderStatus=async function(id,status){
+
+ try{
+   await updateDoc(doc(db,"orders",id),{
+     status,
+     updatedAt:serverTimestamp()
+   });
+
+   const o=orders.find(x=>x.id===id);
+   if(o)o.status=status;
+
+   showToast("Order status updated");
+
+ }catch(e){
+   showToast("Status update error: "+e.message);
+ }
+};
+
+window.viewAdminOrder=function(id){
+
+ const o=orders.find(x=>x.id===id);
+ if(!o)return;
+
+ document.getElementById("orderDetails").innerHTML=`
+   <h2>${esc(o.itemName)}</h2>
+   <p><b>Order ID:</b> ${esc(o.id)}</p>
+   <p><b>Customer:</b> ${esc(o.userEmail)}</p>
+   <p><b>Type:</b> ${esc(o.itemType)}</p>
+   <p><b>Amount:</b> ${money(o.amount)}</p>
+   <p><b>Advance:</b> ${money(o.advance)}</p>
+   <p><b>Due:</b> ${money(o.due)}</p>
+   <p><b>Status:</b> ${esc(o.status)}</p>
+   <p><b>Date:</b> ${dateText(o.createdAt)}</p>
+ `;
+
+ document.getElementById("orderModal").classList.remove("hidden");
+};
+
+window.deleteOrder=async function(id){
+
+ if(!confirm("Order delete করবেন?"))return;
+
+ try{
+   await deleteDoc(doc(db,"orders",id));
+   orders=orders.filter(x=>x.id!==id);
+   renderAdminOrders();
+   showToast("Order deleted");
+ }catch(e){
+   showToast("Delete error: "+e.message);
+ }
+};
+
+
+/* =========================
+   PAYMENTS
+========================= */
+
+function renderAdminPayments(){
+
+ const pending=payments.filter(x=>x.status==="Pending").length;
+ const approved=payments.filter(x=>x.status==="Approved").length;
+ const rejected=payments.filter(x=>x.status==="Rejected").length;
+
+ document.getElementById("paymentStats").innerHTML=`
+ <div class="stat"><div class="label">Pending</div><div class="num">${pending}</div></div>
+ <div class="stat"><div class="label">Approved</div><div class="num">${approved}</div></div>
+ <div class="stat"><div class="label">Rejected</div><div class="num">${rejected}</div></div>
+ `;
+
+ document.getElementById("adminPaymentsTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr>
+ <th>Method</th><th>Amount</th><th>Transaction ID</th>
+ <th>Customer</th><th>Status</th><th>Action</th>
+ </tr>
+
+ ${payments.map(p=>`
+ <tr>
+   <td>${esc(p.method)}</td>
+   <td>${money(p.amount)}</td>
+   <td><b>${esc(p.transactionId)}</b></td>
+   <td>${esc(p.userEmail)}</td>
+   <td><span class="badge badge-blue">${esc(p.status)}</span></td>
+   <td>
+     <button class="btn btn-success" onclick="paymentAction('${p.id}','Approved')">Approve</button>
+     <button class="btn btn-danger" onclick="paymentAction('${p.id}','Rejected')">Reject</button>
+     <button class="btn btn-warning" onclick="paymentAction('${p.id}','Refunded')">Refund</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.paymentAction=async function(id,status){
+
+ try{
+
+   await updateDoc(doc(db,"payments",id),{
+     status,
+     verifiedAt:serverTimestamp(),
+     verifiedBy:currentUser.email
+   });
+
+   const p=payments.find(x=>x.id===id);
+   if(p)p.status=status;
+
+   renderAdminPayments();
+   showToast("Payment "+status);
+
+ }catch(e){
+   showToast("Payment update error: "+e.message);
+ }
+};
+
+
+/* =========================
+   CUSTOMERS
+========================= */
+
+function renderCustomers(){
+
+ const q=(document.getElementById("customerSearch")?.value||"").toLowerCase();
+
+ const data=users.filter(u=>
+   String(u.name||"").toLowerCase().includes(q)||
+   String(u.username||"").toLowerCase().includes(q)||
+   String(u.email||"").toLowerCase().includes(q)||
+   String(u.phone||"").toLowerCase().includes(q)
+ );
+
+ document.getElementById("customersTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr>
+ <th>Name</th><th>Username</th><th>Email</th>
+ <th>Phone</th><th>Status</th><th>Action</th>
+ </tr>
+
+ ${data.map(u=>`
+ <tr>
+   <td>${esc(u.name)}</td>
+   <td>${esc(u.username)}</td>
+   <td>${esc(u.email)}</td>
+   <td>${esc(u.phone)}</td>
+   <td>${u.blocked
+     ?'<span class="badge badge-red">Blocked</span>'
+     :'<span class="badge badge-green">Active</span>'}</td>
+   <td>
+     <button class="btn ${u.blocked?"btn-success":"btn-danger"}"
+       onclick="toggleBlock('${u.id}',${!u.blocked})">
+       ${u.blocked?"Unblock":"Block"}
+     </button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.toggleBlock=async function(id,state){
+
+ try{
+
+   await updateDoc(doc(db,"users",id),{
+     blocked:state,
+     updatedAt:serverTimestamp()
+   });
+
+   const u=users.find(x=>x.id===id);
+   if(u)u.blocked=state;
+
+   renderCustomers();
+
+ }catch(e){
+   showToast("Customer update error: "+e.message);
+ }
+};
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function renderNotifications(){
+
+ document.getElementById("notificationsTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr><th>User ID</th><th>Title</th><th>Message</th><th>Date</th><th>Action</th></tr>
+
+ ${notifications.map(n=>`
+ <tr>
+   <td>${esc(n.userId)}</td>
+   <td>${esc(n.title)}</td>
+   <td>${esc(n.message)}</td>
+   <td>${dateText(n.createdAt)}</td>
+   <td>
+    <button class="btn btn-danger" onclick="deleteNotification('${n.id}')">Delete</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.openNotificationModal=function(){
+
+ document.getElementById("notificationUserId").value="";
+ document.getElementById("notificationTitle").value="";
+ document.getElementById("notificationMessage").value="";
+
+ document.getElementById("notificationModal").classList.remove("hidden");
+};
+
+window.sendNotification=async function(){
+
+ const userId=document.getElementById("notificationUserId").value.trim();
+ const title=document.getElementById("notificationTitle").value.trim();
+ const message=document.getElementById("notificationMessage").value.trim();
+
+ if(!userId||!title||!message){
+   showToast("সব তথ্য দিন");
+   return;
+ }
+
+ try{
+
+   await addDoc(collection(db,"notifications"),{
+     userId,
+     title,
+     message,
+     read:false,
+     createdAt:serverTimestamp()
+   });
+
+   closeModal("notificationModal");
+   notifications=await getCollection("notifications");
+   renderNotifications();
+
+   showToast("Notification sent");
+
+ }catch(e){
+   showToast("Notification error: "+e.message);
+ }
+};
+
+window.deleteNotification=async function(id){
+
+ try{
+   await deleteDoc(doc(db,"notifications",id));
+   notifications=notifications.filter(x=>x.id!==id);
+   renderNotifications();
+ }catch(e){
+   showToast("Delete error");
+ }
+};
+
+
+/* =========================
+   COUPONS
+========================= */
+
+function renderCoupons(){
+
+ document.getElementById("couponsTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr><th>Code</th><th>Discount</th><th>Status</th><th>Action</th></tr>
+
+ ${coupons.map(c=>`
+ <tr>
+   <td><b>${esc(c.code)}</b></td>
+   <td>${esc(c.discount)}%</td>
+   <td>${bool(c.active)
+     ?'<span class="badge badge-green">Active</span>'
+     :'<span class="badge badge-red">Inactive</span>'}</td>
+   <td>
+     <button class="btn btn-danger" onclick="deleteCoupon('${c.id}')">Delete</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.openCouponModal=function(){
+
+ document.getElementById("couponCode").value="";
+ document.getElementById("couponDiscount").value="";
+ document.getElementById("couponActive").value="true";
+
+ document.getElementById("couponModal").classList.remove("hidden");
+};
+
+window.saveCoupon=async function(){
+
+ const code=document.getElementById("couponCode").value.trim().toUpperCase();
+ const discount=Number(document.getElementById("couponDiscount").value);
+ const active=document.getElementById("couponActive").value==="true";
+
+ if(!code||!discount){
+   showToast("Coupon তথ্য দিন");
+   return;
+ }
+
+ try{
+
+   await addDoc(collection(db,"coupons"),{
+     code,
+     discount,
+     active,
+     createdAt:serverTimestamp()
+   });
+
+   closeModal("couponModal");
+
+   coupons=await getCollection("coupons");
+   renderCoupons();
+
+   showToast("Coupon added");
+
+ }catch(e){
+   showToast("Coupon error: "+e.message);
+ }
+};
+
+window.deleteCoupon=async function(id){
+
+ if(!confirm("Coupon delete করবেন?"))return;
+
+ try{
+   await deleteDoc(doc(db,"coupons",id));
+   coupons=coupons.filter(x=>x.id!==id);
+   renderCoupons();
+ }catch(e){
+   showToast("Delete error");
+ }
+};
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+function renderCategories(){
+
+ document.getElementById("categoriesTable").innerHTML=`
+ <div class="admin-table-wrap">
+ <table>
+ <tr><th>Name</th><th>Type</th><th>Action</th></tr>
+
+ ${categories.map(c=>`
+ <tr>
+   <td>${esc(c.name)}</td>
+   <td>${esc(c.type)}</td>
+   <td>
+    <button class="btn btn-danger" onclick="deleteCategory('${c.id}')">Delete</button>
+   </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ </div>`;
+}
+
+window.openCategoryModal=function(){
+
+ document.getElementById("categoryName").value="";
+ document.getElementById("categoryType").value="Product";
+
+ document.getElementById("categoryModal").classList.remove("hidden");
+};
+
+window.saveCategory=async function(){
+
+ const name=document.getElementById("categoryName").value.trim();
+ const type=document.getElementById("categoryType").value.trim();
+
+ if(!name){
+   showToast("Category Name দিন");
+   return;
+ }
+
+ try{
+
+   await addDoc(collection(db,"categories"),{
+     name,
+     type,
+     createdAt:serverTimestamp()
+   });
+
+   closeModal("categoryModal");
+
+   categories=await getCollection("categories");
+   renderCategories();
+
+   showToast("Category added");
+
+ }catch(e){
+   showToast("Category error: "+e.message);
+ }
+};
+
+window.deleteCategory=async function(id){
+
+ if(!confirm("Category delete করবেন?"))return;
+
+ try{
+   await deleteDoc(doc(db,"categories",id));
+   categories=categories.filter(x=>x.id!==id);
+   renderCategories();
+ }catch(e){
+   showToast("Delete error");
+ }
+};
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+async function loadSettings(){
+
+ try{
+
+   const snap=await getDoc(doc(db,"settings","store"));
+
+   if(!snap.exists())return;
+
+   const s=snap.data();
+
+   document.getElementById("setName").value=s.storeName||"Sell Official";
+   document.getElementById("setEmail").value=s.supportEmail||"";
+   document.getElementById("setWhatsapp").value=s.whatsapp||"01845077415";
+   document.getElementById("setFacebook").value=s.facebook||"";
+   document.getElementById("setBkash").value=s.bkash||"";
+   document.getElementById("setNagad").value=s.nagad||"";
+   document.getElementById("setRocket").value=s.rocket||"";
+   document.getElementById("setPaymentInstructions").value=s.paymentInstructions||"";
+   document.getElementById("setDeliveryInstructions").value=s.deliveryInstructions||"";
+
+ }catch(e){
+   console.error(e);
+ }
+}
+
+window.saveSettings=async function(){
+
+ try{
+
+   await setDoc(doc(db,"settings","store"),{
+     storeName:document.getElementById("setName").value.trim(),
+     supportEmail:document.getElementById("setEmail").value.trim(),
+     whatsapp:document.getElementById("setWhatsapp").value.trim(),
+     facebook:document.getElementById("setFacebook").value.trim(),
+     bkash:document.getElementById("setBkash").value.trim(),
+     nagad:document.getElementById("setNagad").value.trim(),
+     rocket:document.getElementById("setRocket").value.trim(),
+     paymentInstructions:document.getElementById("setPaymentInstructions").value,
+     deliveryInstructions:document.getElementById("setDeliveryInstructions").value,
+     updatedAt:serverTimestamp()
+   });
+
+   showToast("Settings saved");
+
+ }catch(e){
+   console.error(e);
+   showToast("Settings save error: "+e.message);
+ }
+};
+
+
+/* =========================
+   CLOSE MODAL ON BACKDROP
+========================= */
+
+document.querySelectorAll(".modal").forEach(m=>{
+ m.addEventListener("click",e=>{
+   if(e.target===m)m.classList.add("hidden");
+ });
+});
+
+</script>
+</body>
+</html>
