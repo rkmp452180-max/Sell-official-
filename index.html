@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sell Official - Digital Marketplace</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #172033;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #ffffff;
+      border-bottom: 1px solid #e8eaf0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      width: min(1200px, 94%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2563eb;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #111827;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 17px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: white;
+    }
+
+    .btn-light {
+      background: #eef2ff;
+      color: #2563eb;
+    }
+
+    .cart {
+      position: relative;
+      border: none;
+      background: #f3f4f6;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ef4444;
+      color: white;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: #f3f4f6;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 20px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        linear-gradient(135deg, #111827, #1d4ed8);
+      color: white;
+      padding: 75px 20px;
+    }
+
+    .hero-container {
+      width: min(1200px, 94%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 65px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #93c5fd;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #dbeafe;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 18px;
+    }
+
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    .hero-stat:last-child {
+      border-bottom: none;
+    }
+
+    /* SEARCH */
+
+    .search-section {
+      width: min(1200px, 94%);
+      margin: -25px auto 30px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .search-box {
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.10);
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    /* CATEGORIES */
+
+    .section {
+      width: min(1200px, 94%);
+      margin: 55px auto;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .section-header h2 {
+      font-size: 30px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .category {
+      border: 1px solid #e5e7eb;
+      background: white;
+      padding: 25px 18px;
+      border-radius: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      border-color: #2563eb;
+      box-shadow: 0 10px 25px rgba(37,99,235,.10);
+    }
+
+    .category-icon {
+      font-size: 35px;
+      margin-bottom: 12px;
+    }
+
+    .category h3 {
+      margin-bottom: 7px;
+    }
+
+    .category p {
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* FILTER */
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      border: 1px solid #d1d5db;
+      background: white;
+      padding: 9px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 17px;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0,0,0,.08);
+    }
+
+    .product-image {
+      height: 175px;
+      background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .product-body {
+      padding: 17px;
+    }
+
+    .product-category {
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .product h3 {
+      margin: 8px 0;
+      font-size: 17px;
+    }
+
+    .rating {
+      color: #f59e0b;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    /* FEATURES */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .feature p {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* CTA */
+
+    .seller-cta {
+      background: #111827;
+      color: white;
+      border-radius: 22px;
+      padding: 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .seller-cta p {
+      color: #cbd5e1;
+      margin-top: 10px;
+    }
+
+    /* MODAL */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      width: min(600px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      border-radius: 20px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      border: none;
+      background: #f3f4f6;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 18px;
+      padding-right: 40px;
+    }
+
+    /* FORM */
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* PAYMENT */
+
+    .payment-product {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .payment-method {
+      border: 2px solid #e5e7eb;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      background: white;
+      font-weight: 700;
+    }
+
+    .payment-method.selected {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .payment-number {
+      background: #f1f5f9;
+      padding: 14px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-size: 19px;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .notice {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      padding: 13px;
+      border-radius: 10px;
+      line-height: 1.5;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 50px 20px 25px;
+      margin-top: 70px;
+    }
+
+    .footer-container {
+      width: min(1200px, 94%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+    }
+
+    footer p,
+    footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      line-height: 2;
+      font-size: 14px;
+      display: block;
+    }
+
+    .copyright {
+      width: min(1200px, 94%);
+      margin: 35px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .categories,
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-buttons .btn-dark {
+        display: none;
+      }
+
+      .hero {
+        padding: 55px 15px;
+      }
+
+      .products,
+      .categories,
+      .features,
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
+
+      .seller-cta {
+        padding: 30px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+  <div class="nav-container">
+
+    <a href="#" class="logo">
+      Sell <span>Official</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#features">Features</a>
+    </div>
+
+    <div class="nav-buttons">
+
+      <button class="cart" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+
+      <button class="btn btn-dark" onclick="openLogin()">
+        Login
+      </button>
+
+      <button class="menu-btn" onclick="toggleMenu()">
+        ☰
+      </button>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+  <div class="hero-container">
+
+    <div>
+
+      <h1>
+        Buy & Sell
+        <span>Digital Products</span>
+      </h1>
+
+      <p>
+        Sell Official is a digital marketplace for apps,
+        websites, software, templates and other digital products.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button
+          class="btn btn-primary"
+          onclick="document.getElementById('products').scrollIntoView()">
+          Explore Products
+        </button>
+
+        <button
+          class="btn btn-light"
+          onclick="openSeller()">
+          Become a Seller
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+      <h3>Sell Official Marketplace</h3>
+
+      <div class="hero-stat">
+        <span>Products</span>
+        <strong>1000+</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>Sellers</span>
+        <strong>500+</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>Buyers</span>
+        <strong>10K+</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>Secure Payments</span>
+        <strong>✓</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search-section">
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search APKs, websites, software..."
+      oninput="searchProducts()">
+
+    <button
+      class="btn btn-primary"
+      onclick="searchProducts()">
+      Search
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CATEGORIES -->
+
+<section class="section" id="categories">
+
+  <div class="section-header">
+    <h2>Categories</h2>
+  </div>
+
+  <div class="categories">
+
+    <div class="category" onclick="filterCategory('APK')">
+      <div class="category-icon">📱</div>
+      <h3>Android Apps</h3>
+      <p>Premium APK apps</p>
+    </div>
+
+    <div class="category" onclick="filterCategory('Website')">
+      <div class="category-icon">🌐</div>
+      <h3>Websites</h3>
+      <p>Ready-made websites</p>
+    </div>
+
+    <div class="category" onclick="filterCategory('Software')">
+      <div class="category-icon">💻</div>
+      <h3>Software</h3>
+      <p>Digital software</p>
+    </div>
+
+    <div class="category" onclick="filterCategory('Template')">
+      <div class="category-icon">🎨</div>
+      <h3>Templates</h3>
+      <p>Design & code templates</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="section" id="products">
+
+  <div class="section-header">
+
+    <h2>Featured Products</h2>
+
+    <div class="filters">
+
+      <button
+        class="filter-btn active"
+        onclick="filterCategory('All', this)">
+        All
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterCategory('APK', this)">
+        APK
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterCategory('Website', this)">
+        Websites
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterCategory('Software', this)">
+        Software
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterCategory('Template', this)">
+        Templates
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="products" id="productGrid">
+
+    <!-- PRODUCT 1 -->
+
+    <div
+      class="product"
+      data-category="APK"
+      data-name="Social Media Pro APK"
+      data-price="499">
+
+      <div class="product-image">
+        📱
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          APK
+        </div>
+
+        <h3>Social Media Pro APK</h3>
+
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ 4.9
+        </div>
+
+        <p>
+          Premium Android application package.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">
+            ৳499
+          </span>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPayment('Social Media Pro APK', 499)">
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 2 -->
+
+    <div
+      class="product"
+      data-category="Website"
+      data-name="Business Website"
+      data-price="1499">
+
+      <div class="product-image">
+        🌐
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          Website
+        </div>
+
+        <h3>Business Website</h3>
+
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ 4.8
+        </div>
+
+        <p>
+          Responsive modern business website.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">
+            ৳1,499
+          </span>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPayment('Business Website', 1499)">
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 3 -->
+
+    <div
+      class="product"
+      data-category="Software"
+      data-name="Inventory Software"
+      data-price="999">
+
+      <div class="product-image">
+        💻
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          Software
+        </div>
+
+        <h3>Inventory Software</h3>
+
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ 4.7
+        </div>
+
+        <p>
+          Simple digital inventory management software.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">
+            ৳999
+          </span>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPayment('Inventory Software', 999)">
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 4 -->
+
+    <div
+      class="product"
+      data-category="Template"
+      data-name="Premium UI Template"
+      data-price="699">
+
+      <div class="product-image">
+        🎨
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          Template
+        </div>
+
+        <h3>Premium UI Template</h3>
+
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ 4.9
+        </div>
+
+        <p>
+          Modern UI template for digital projects.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">
+            ৳699
+          </span>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPayment('Premium UI Template', 699)">
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+  <div class="section-header">
+    <h2>Why Sell Official?</h2>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🔐</div>
+      <h3>Secure</h3>
+      <p>
+        Payment and download access will be protected
+        using Firebase security rules.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">💳</div>
+      <h3>bKash & Nagad</h3>
+      <p>
+        Customers can submit their payment transaction
+        information.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>Fast Access</h3>
+      <p>
+        Approved customers can access their purchased
+        digital products.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🛍️</div>
+      <h3>Marketplace</h3>
+      <p>
+        Sellers can upload and sell their own digital
+        products after approval.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SELLER CTA -->
+
+<section class="section">
+
+  <div class="seller-cta">
+
+    <div>
+      <h2>Have a digital product?</h2>
+
+      <p>
+        Become a seller and list your apps,
+        websites, software and templates.
+      </p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="openSeller()">
+      Become a Seller
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('loginModal')">
+      ×
+    </button>
+
+    <h2>Login to Sell Official</h2>
+
+    <div class="form-group">
+
+      <label>Email</label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Enter your email">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Password</label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Enter password">
+
+    </div>
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;"
+      onclick="demoLogin()">
+      Login
+    </button>
+
+    <p style="text-align:center;margin-top:15px;color:#6b7280;">
+      Don't have an account?
+      <b style="color:#2563eb;cursor:pointer;" onclick="openSignup()">
+        Create Account
+      </b>
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- SIGNUP MODAL -->
+
+<div class="modal" id="signupModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('signupModal')">
+      ×
+    </button>
+
+    <h2>Create Account</h2>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        id="signupName"
+        type="text"
+        placeholder="Your name">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Your email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Create password">
+    </div>
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;"
+      onclick="demoSignup()">
+      Create Account
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div class="modal" id="paymentModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('paymentModal')">
+      ×
+    </button>
+
+    <h2>Complete Payment</h2>
+
+    <div class="payment-product">
+
+      <strong id="paymentProduct">
+        Product
+      </strong>
+
+      <br>
+
+      <span>
+        Price:
+        <strong id="paymentPrice">
+          ৳0
+        </strong>
+      </span>
+
+    </div>
+
+
+    <div class="notice">
+
+      Send the exact product price to our
+      bKash or Nagad payment number.
+
+      After payment, enter your Transaction ID below.
+
+      Your order will remain <strong>Pending</strong>
+      until an admin verifies the payment.
+
+    </div>
+
+
+    <div class="payment-methods">
+
+      <div
+        class="payment-method selected"
+        id="bkashMethod"
+        onclick="selectPayment('bKash')">
+
+        <div style="font-size:25px;">
+          💳
+        </div>
+
+        bKash
+
+      </div>
+
+
+      <div
+        class="payment-method"
+        id="nagadMethod"
+        onclick="selectPayment('Nagad')">
+
+        <div style="font-size:25px;">
+          💳
+        </div>
+
+        Nagad
+
+      </div>
+
+    </div>
+
+
+    <div class="payment-number">
+
+      <span id="paymentMethodName">
+        bKash
+      </span>
+
+      <br>
+
+      <span>
+        01893109600
+      </span>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Transaction ID
+      </label>
+
+      <input
+        id="transactionId"
+        type="text"
+        placeholder="Enter your transaction ID">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Your Email
+      </label>
+
+      <input
+        id="paymentEmail"
+        type="email"
+        placeholder="Enter your email">
+
+    </div>
+
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;"
+      onclick="submitPayment()">
+
+      Submit Payment
+
+    </button>
+
+    <p
+      style="
+        margin-top:12px;
+        font-size:12px;
+        color:#6b7280;
+        text-align:center;
+      ">
+
+      Do not submit fake or incorrect transaction information.
+
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- CART MODAL -->
+
+<div class="modal" id="cartModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('cartModal')">
+      ×
+    </button>
+
+    <h2>Your Cart</h2>
+
+    <div id="cartItems">
+
+      <p style="color:#6b7280;">
+        Your cart is empty.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SELLER MODAL -->
+
+<div class="modal" id="sellerModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('sellerModal')">
+      ×
+    </button>
+
+    <h2>Become a Seller</h2>
+
+    <div class="form-group">
+
+      <label>Name</label>
+
+      <input
+        type="text"
+        id="sellerName"
+        placeholder="Your name">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        id="sellerEmail"
+        placeholder="Your email">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Product Type</label>
+
+      <select id="sellerType">
+
+        <option>Android App</option>
+        <option>Website</option>
+        <option>Software</option>
+        <option>Template</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Product Details</label>
+
+      <textarea
+        id="sellerDetails"
+        placeholder="Tell us about your product">
+      </textarea>
+
+    </div>
+
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;"
+      onclick="submitSeller()">
+
+      Submit Seller Request
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-container">
+
+    <div>
+
+      <h3>Sell Official</h3>
+
+      <p>
+        A marketplace for digital products,
+        apps, websites, software and templates.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>Marketplace</h3>
+
+      <a href="#products">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#">Orders</a>
+      <a href="#">Downloads</a>
+
+    </div>
+
+
+    <div>
+
+      <h3>For Sellers</h3>
+
+      <a href="#" onclick="openSeller()">Become a Seller</a>
+      <a href="#">Seller Dashboard</a>
+      <a href="#">Seller Rules</a>
+
+    </div>
+
+
+    <div>
+
+      <h3>Support</h3>
+
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Refund Policy</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © 2026 Sell Official. All rights reserved.
+
+  </div>
+
+</footer>
+
+
+<script>
+
+  /* =========================
+     GLOBAL VARIABLES
+  ========================= */
+
+  let cart = [];
+
+  let currentProduct = {
+    name: "",
+    price: 0
+  };
+
+  let selectedPaymentMethod = "bKash";
+
+
+  /* =========================
+     MODALS
+  ========================= */
+
+  function openModal(id) {
+    document.getElementById(id).classList.add("show");
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+  }
+
+
+  /* =========================
+     LOGIN
+  ========================= */
+
+  function openLogin() {
+    openModal("loginModal");
+  }
+
+
+  function openSignup() {
+
+    closeModal("loginModal");
+
+    openModal("signupModal");
+
+  }
+
+
+  function demoLogin() {
+
+    const email =
+      document.getElementById("loginEmail").value;
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+    if (!email || !password) {
+
+      alert("Please enter email and password.");
+
+      return;
+    }
+
+    alert(
+      "Demo login only. Firebase Authentication will be connected next."
+    );
+
+  }
+
+
+  function demoSignup() {
+
+    const name =
+      document.getElementById("signupName").value;
+
+    const email =
+      document.getElementById("signupEmail").value;
+
+    const password =
+      document.getElementById("signupPassword").value;
+
+    if (!name || !email || !password) {
+
+      alert("Please fill all fields.");
+
+      return;
+    }
+
+    alert(
+      "Demo signup only. Firebase Authentication will be connected next."
+    );
+
+  }
+
+
+  /* =========================
+     PAYMENT
+  ========================= */
+
+  function openPayment(name, price) {
+
+    currentProduct.name = name;
+
+    currentProduct.price = price;
+
+    document.getElementById("paymentProduct").innerText =
+      name;
+
+    document.getElementById("paymentPrice").innerText =
+      "৳" + price.toLocaleString();
+
+    document.getElementById("transactionId").value = "";
+
+    document.getElementById("paymentEmail").value = "";
+
+    selectPayment("bKash");
+
+    openModal("paymentModal");
+
+  }
+
+
+  function selectPayment(method) {
+
+    selectedPaymentMethod = method;
+
+    const bkash =
+      document.getElementById("bkashMethod");
+
+    const nagad =
+      document.getElementById("nagadMethod");
+
+    const methodName =
+      document.getElementById("paymentMethodName");
+
+
+    bkash.classList.remove("selected");
+
+    nagad.classList.remove("selected");
+
+
+    if (method === "bKash") {
+
+      bkash.classList.add("selected");
+
+    } else {
+
+      nagad.classList.add("selected");
+
+    }
+
+
+    methodName.innerText = method;
+
+  }
+
+
+  function submitPayment() {
+
+    const transactionId =
+      document.getElementById("transactionId").value.trim();
+
+    const email =
+      document.getElementById("paymentEmail").value.trim();
+
+
+    if (!transactionId) {
+
+      alert("Please enter your Transaction ID.");
+
+      return;
+    }
+
+
+    if (!email) {
+
+      alert("Please enter your email.");
+
+      return;
+    }
+
+
+    alert(
+      "Payment submitted successfully in DEMO mode.\n\n" +
+      "Product: " + currentProduct.name + "\n" +
+      "Amount: ৳" + currentProduct.price + "\n" +
+      "Method: " + selectedPaymentMethod + "\n" +
+      "Transaction ID: " + transactionId + "\n\n" +
+      "Firebase will be connected next so the order can be sent to the Admin Panel."
+    );
+
+
+    closeModal("paymentModal");
+
+  }
+
+
+  /* =========================
+     CART
+  ========================= */
+
+  function addToCart(name, price) {
+
+    cart.push({
+      name: name,
+      price: price
+    });
+
+    document.getElementById("cartCount").innerText =
+      cart.length;
+
+    renderCart();
+
+  }
+
+
+  function openCart() {
+
+    renderCart();
+
+    openModal("cartModal");
+
+  }
+
+
+  function renderCart() {
+
+    const box =
+      document.getElementById("cartItems");
+
+
+    if (cart.length === 0) {
+
+      box.innerHTML =
+        '<p style="color:#6b7280;">Your cart is empty.</p>';
+
+      return;
+    }
+
+
+    let html = "";
+
+    let total = 0;
+
+
+    cart.forEach((item, index) => {
+
+      total += item.price;
+
+      html += `
+
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:12px 0;
+            border-bottom:1px solid #eee;
+          ">
+
+          <div>
+
+            <strong>${item.name}</strong>
+
+            <br>
+
+            <span>
+              ৳${item.price.toLocaleString()}
+            </span>
+
+          </div>
+
+          <button
+            class="btn btn-light"
+            onclick="removeCart(${index})">
+
+            Remove
+
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+
+    html += `
+
+      <div
+        style="
+          margin-top:18px;
+          display:flex;
+          justify-content:space-between;
+          font-size:20px;
+          font-weight:800;
+        ">
+
+        <span>Total</span>
+
+        <span>৳${total.toLocaleString()}</span>
+
+      </div>
+
+    `;
+
+
+    box.innerHTML = html;
+
+  }
+
+
+  function removeCart(index) {
+
+    cart.splice(index, 1);
+
+    document.getElementById("cartCount").innerText =
+      cart.length;
+
+    renderCart();
+
+  }
+
+
+  /* =========================
+     CATEGORY FILTER
+  ========================= */
+
+  function filterCategory(category, button) {
+
+    const products =
+      document.querySelectorAll(".product");
+
+
+    products.forEach(product => {
+
+      if (
+        category === "All" ||
+        product.dataset.category === category
+      ) {
+
+        product.style.display = "";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+
+    if (button) {
+
+      document
+        .querySelectorAll(".filter-btn")
+        .forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+    }
+
+
+    document
+      .getElementById("products")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  /* =========================
+     SEARCH
+  ========================= */
+
+  function searchProducts() {
+
+    const query =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    document
+      .querySelectorAll(".product")
+      .forEach(product => {
+
+        const name =
+          product.dataset.name.toLowerCase();
+
+        const category =
+          product.dataset.category.toLowerCase();
+
+
+        if (
+          name.includes(query) ||
+          category.includes(query)
+        ) {
+
+          product.style.display = "";
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+
+  }
+
+
+  /* =========================
+     SELLER
+  ========================= */
+
+  function openSeller() {
+
+    openModal("sellerModal");
+
+  }
+
+
+  function submitSeller() {
+
+    const name =
+      document.getElementById("sellerName").value;
+
+    const email =
+      document.getElementById("sellerEmail").value;
+
+    const type =
+      document.getElementById("sellerType").value;
+
+    const details =
+      document.getElementById("sellerDetails").value;
+
+
+    if (!name || !email || !details) {
+
+      alert("Please fill all required fields.");
+
+      return;
+
+    }
+
+
+    alert(
+      "Seller request submitted in DEMO mode.\n\n" +
+      "Firebase database will be connected next."
+    );
+
+
+    closeModal("sellerModal");
+
+  }
+
+
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  function toggleMenu() {
+
+    const links =
+      document.querySelector(".nav-links");
+
+
+    if (
+      links.style.display === "flex"
+    ) {
+
+      links.style.display = "none";
+
+    } else {
+
+      links.style.display = "flex";
+
+      links.style.flexDirection = "column";
+
+      links.style.position = "absolute";
+
+      links.style.top = "70px";
+
+      links.style.left = "0";
+
+      links.style.right = "0";
+
+      links.style.background = "white";
+
+      links.style.padding = "20px";
+
+      links.style.borderBottom =
+        "1px solid #eee";
+
+    }
+
+  }
+
+
+  /* =========================
+     CLOSE MODAL WHEN CLICK OUTSIDE
+  ========================= */
+
+  document
+    .querySelectorAll(".modal")
+    .forEach(modal => {
+
+      modal.addEventListener("click", function(e) {
+
+        if (e.target === modal) {
+
+          modal.classList.remove("show");
+
+        }
+
+      });
+
+    });
+
+</script>
+
+</body>
+</html>
